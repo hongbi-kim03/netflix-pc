@@ -336,23 +336,22 @@
 .curation-section {
     color: white;
     padding: 200px 40px;
-    font-family: '맑은 고딕', sans-serif;
 }
 
 /* 컨테이너 */
 .curation-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: flex-start;
-    max-width: 1200px;
+    width: 1280px;
     margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
 }
 
 /* 왼쪽 포스터 + 버튼 */
 .curation-left {
     width: 320px;
+    flex-shrink: 0;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -563,7 +562,6 @@
     line-height: 1.6;
     color: #ddd;
     margin-bottom: 30px;
-    justify-content: center;
 }
 
 /* 관련 콘텐츠 */
@@ -571,11 +569,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    justify-content: flex-start;
 }
 
 .related-content .item {
-    /* width: 120px; */
     width: 200px;
     text-align: center;
     position: relative;
@@ -619,22 +615,12 @@
     background-color: #e50914;
 }
 
-.label.red {
-    background-color: #e50914;
-}
-
 /* 가입해야 하는 내용 */
-
-/* 전체 섹션 스타일 */
 .why-join-section {
-    padding: 0px 40px;
-    max-width: 1200px;
     width: 1200px;
     margin: 0 auto;
+    padding: 0; 
     color: white;
-    font-family: '맑은 고딕', sans-serif;
-    box-sizing: border-box;
-    overflow-x: hidden;
 }
 /* 제목 */
 .section-title {
@@ -679,7 +665,6 @@
 
 /* 아이콘 이미지 */
 .feature-card img {
-    /*width: 50px; */
     width: 100px;
     position: absolute;
     bottom: 15px;
@@ -687,21 +672,21 @@
     opacity: 0.9;
 }
 
-/* 고객센터 전체 섹션 */
+/* 고객센터*/
 .support-section {
-    padding: 200px 40px;
+    padding: 200px 0;
     color: #eee;
     text-align: center;
 }
 
 /* 그리드 정렬 */
 .support-grid {
+    width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     justify-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 /* 각 항목 카드 스타일 */
@@ -721,14 +706,12 @@
     box-shadow: 0 6px 24px rgba(255, 255, 255, 0.15);
 }
 
-/* 아이콘 */
 .support-item img {
     width: 60px;
     margin-bottom: 16px;
     filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
 }
 
-/* 텍스트 */
 .support-item p {
     font-size: 16px;
     color: #fff;
