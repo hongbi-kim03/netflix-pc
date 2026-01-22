@@ -285,7 +285,6 @@
         color: #fff;
         text-align: center;
         font-size: 28px;
-        margin: 50px 0 120px;
         text-shadow: 0 0 10px #f9d71c;
     }
 
@@ -707,6 +706,7 @@
 /* 그리드 정렬 */
 .support-grid {
     width: 1200px;
+    max-width: 1200px; /* 🔒 고정형 명시 */
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
