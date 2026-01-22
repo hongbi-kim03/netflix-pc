@@ -642,8 +642,9 @@
 /* 가입해야 하는 내용 */
 .why-join-section {
     width: 1200px;
+    max-width: 1200px;   /* 🔒 고정형 명확 */
     margin: 0 auto;
-    padding: 0; 
+    padding: 120px 24px;   /* 🔥 PC 섹션 여백 */
     color: white;
 }
 /* 제목 */
