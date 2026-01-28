@@ -1,6 +1,6 @@
     /* wrap */
     .wrap {
-        min-width: 1280px;
+        width: 1280px;
         margin: 0 auto;
     }
 
@@ -445,9 +445,8 @@
     display: none;
 }
 
-/* ================================
-   주간 공개 카드
-================================ */
+
+/* 주간 공개 카드 */
 .weekly-slide {
     position: relative;
     width: 100%;
