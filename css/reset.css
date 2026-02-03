@@ -12,6 +12,12 @@ body {
     font-family: 'Noto Sans KR Light',sans-serif;
     background: linear-gradient(135deg, #2b0f3e, #000000);  
     color: white;
+
+    /* 텍스트 복사 및 드래그 방지 */
+    -webkit-user-select: none;  /* Safari */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* 표준 */
 }
 
 ul, li {

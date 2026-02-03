@@ -1,5 +1,5 @@
 /* ==================================================
-  EPISODE DATA
+  EPISODE DATA (기존 데이터 유지)
 ================================================== */
 const EPISODES = {
   "ginny-georgia": [
@@ -463,85 +463,122 @@ const EPISODES = {
     }
   ]
 };
-
-
-function renderEpisodes(seriesKey) {
-  const list = document.querySelector("episode-list");
-  list.innerHTML = "";
-
-  const episodes = EPISODES[seriesKey];
-
-  // 회차 없는 경우
-  if (!episodes || episodes.length === 0) {
-    list.innerHTML = `
-      <div class="no-episode">
-        <p>회차 정보가 아직 없습니다.</p>
-      </div>
-    `;
-    return;
-  }
-
-  // 회차 있는 경우
-  episodes.forEach(ep => {
-    list.innerHTML += `
-      <div class="episode">
-        <div class="episode-left">
-          <span class="episode-number">${ep.number}</span>
-          <iframe src="${ep.video}" allowfullscreen></iframe>
-        </div>
-        <div class="episode-right">
-          <h3>${ep.title} <span class="duration">(${ep.duration})</span></h3>
-          <p>${ep.desc}</p>
-        </div>
-      </div>
-    `;
-  });
-}
-
-
-
-
 /* ==================================================
   DOM READY
 ================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  initCustomSelect();
+  initCustomSelect(); // 필터링 기능 통합됨
   initContentSlider();
   initModal();
   initEpisodeScroll();
 });
 
 /* ==================================================
-  1. 커스텀 셀렉트
+  1. 커스텀 셀렉트 & 장르 필터링 (업데이트됨)
+================================================== */
+/* ==================================================
+  1. 통합 필터링 및 정렬 시스템 (수정본)
 ================================================== */
 function initCustomSelect() {
-  const selects = document.querySelectorAll(".custom-select");
+    const selects = document.querySelectorAll(".custom-select");
+    const grid = document.querySelector(".content-grid"); // 카드가 담긴 컨테이너
+    const items = Array.from(document.querySelectorAll(".content-card")); // 배열로 변환
 
-  selects.forEach(select => {
-    const selected = select.querySelector(".selected");
-    const options = select.querySelector(".options");
+    // 필터 상태를 저장할 객체
+    const currentFilters = {
+        category: 'all',
+        language: 'all',
+        sort: 'default'
+    };
 
-    selected.addEventListener("click", e => {
-      e.stopPropagation();
-      selects.forEach(s => s !== select && s.classList.remove("open"));
-      select.classList.toggle("open");
+    selects.forEach(select => {
+        const selected = select.querySelector(".selected");
+        const options = select.querySelector(".options");
+        const filterType = select.dataset.filter; 
+
+        selected.addEventListener("click", e => {
+            e.stopPropagation();
+            // 다른 드롭다운 닫기
+            selects.forEach(s => s !== select && s.classList.remove("open"));
+            select.classList.toggle("open");
+        });
+
+        options.querySelectorAll("li").forEach(option => {
+            option.addEventListener("click", () => {
+                const value = option.getAttribute("data-value");
+                const text = option.textContent;
+
+                selected.textContent = text;
+                select.classList.remove("open");
+
+                // 상태 업데이트 및 필터 실행
+                if (filterType) {
+                    currentFilters[filterType] = value;
+                    applyFiltersAndSort();
+                }
+            });
+        });
     });
 
-    options.querySelectorAll("li").forEach(option => {
-      option.addEventListener("click", () => {
-        selected.textContent = option.textContent;
-        select.classList.remove("open");
-      });
-    });
-  });
+    function applyFiltersAndSort() {
+        // 1. 필터링 로직
+        const filteredItems = items.filter(item => {
+            // HTML의 data-category와 data-language 속성을 가져옴
+            const itemCat = item.getAttribute("data-category"); 
+            const itemLang = item.getAttribute("data-language");
 
-  document.addEventListener("click", () => {
-    selects.forEach(select => select.classList.remove("open"));
-  });
+            const catMatch = currentFilters.category === 'all' || itemCat === currentFilters.category;
+            const langMatch = currentFilters.language === 'all' || itemLang === currentFilters.language;
+
+            return catMatch && langMatch;
+        });
+
+        // 2. 정렬 로직
+        filteredItems.sort((a, b) => {
+            if (currentFilters.sort === 'title') {
+                const titleA = a.querySelector('img')?.dataset.title || "";
+                const titleB = b.querySelector('img')?.dataset.title || "";
+                return titleA.localeCompare(titleB, 'ko');
+            } else if (currentFilters.sort === 'category') {
+                return a.dataset.category.localeCompare(b.dataset.category);
+            } else if (currentFilters.sort === 'language') {
+                return a.dataset.language.localeCompare(b.dataset.language);
+            } else {
+                // 기본순 (data-sort 번호순)
+                return parseInt(a.dataset.sort) - parseInt(b.dataset.sort);
+            }
+        });
+
+        // 3. DOM 업데이트
+        // 모든 카드 일단 숨김
+        items.forEach(item => {
+            item.style.display = "none";
+            item.style.opacity = "0";
+        });
+
+        // 필터링 및 정렬된 카드만 순서대로 다시 노출
+        filteredItems.forEach(item => {
+            grid.appendChild(item); // 순서 재배치
+            item.style.display = "block";
+            // 애니메이션을 위해 약간의 지연 후 opacity 조절
+            setTimeout(() => {
+                item.style.opacity = "1";
+            }, 10);
+        });
+
+        // 결과가 없을 때 처리 (선택 사항)
+        if (filteredItems.length === 0) {
+            console.log("검색 결과가 없습니다.");
+        }
+    }
+
+    // 빈 화면 클릭 시 드롭다운 닫기
+    document.addEventListener("click", () => {
+        selects.forEach(select => select.classList.remove("open"));
+    });
 }
-
 /* ==================================================
-  2. 콘텐츠 슬라이더
+  2. 콘텐츠 슬라이더 (기존 기능 유지)
 ================================================== */
 function initContentSlider() {
   document.querySelectorAll(".content-grid").forEach(slider => {
@@ -556,15 +593,15 @@ function initContentSlider() {
       autoTimer = setInterval(() => {
         const move = slider.clientWidth / 5;
         const max = slider.scrollWidth - slider.clientWidth;
-        slider.scrollLeft + move >= max
-          ? slider.scrollTo({ left: 0, behavior: "smooth" })
-          : slider.scrollBy({ left: move, behavior: "smooth" });
+        if (slider.scrollLeft + move >= max) {
+          slider.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          slider.scrollBy({ left: move, behavior: "smooth" });
+        }
       }, 5000);
     }
 
-    function stopAuto() {
-      clearInterval(autoTimer);
-    }
+    function stopAuto() { clearInterval(autoTimer); }
 
     function inertia() {
       velocity *= 0.95;
@@ -603,7 +640,7 @@ function initContentSlider() {
 }
 
 /* ==================================================
-  3. 모달 + 회차 렌더링
+  3. 모달 제어 (기존 기능 유지)
 ================================================== */
 function initModal() {
   const modal = document.getElementById("image-modal");
@@ -648,15 +685,15 @@ function initModal() {
 }
 
 /* ==================================================
-  4. 회차 렌더링
+  4. 회차 렌더링 (기존 기능 유지)
 ================================================== */
 function renderEpisodes(seriesId) {
   const list = document.getElementById("episode-list");
   if (!list) return;
 
   const episodes = EPISODES[seriesId];
-  if (!episodes) {
-    list.innerHTML = "";
+  if (!episodes || episodes.length === 0) {
+    list.innerHTML = `<div class="no-episode"><p>회차 정보가 아직 없습니다.</p></div>`;
     return;
   }
 
@@ -675,7 +712,7 @@ function renderEpisodes(seriesId) {
 }
 
 /* ==================================================
-  5. 에피소드 스크롤 (드래그)
+  5. 에피소드 스크롤 (기존 기능 유지)
 ================================================== */
 function initEpisodeScroll() {
   const area = document.querySelector(".episode-scroll");
@@ -705,10 +742,11 @@ function initEpisodeScroll() {
 }
 
 /* ==================================================
-  6. iframe 정지
+  6. iframe 정지 (기존 기능 유지)
 ================================================== */
-  function stopAllVideos() {
+function stopAllVideos() {
   document.querySelectorAll("iframe").forEach(iframe => {
-  iframe.src = iframe.src;
+    const src = iframe.src;
+    iframe.src = src; 
   });
 }
