@@ -653,7 +653,9 @@ function initModal() {
   const closeBtn = modal.querySelector(".close");
 
   function openModal(target) {
-    modal.style.display = "block";
+    // 기존 display: block 대신 클래스 추가 방식 (애니메이션을 위해 추천)
+    modal.classList.add("show"); 
+    modal.style.display = "flex"; // CSS에서 .modal { display:none } 인 경우
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
@@ -665,9 +667,14 @@ function initModal() {
     modalFeature.textContent = target.dataset.feature || "";
 
     renderEpisodes(target.dataset.id);
+    
+    // 모달을 열 때마다 스크롤을 맨 위로 초기화
+    const modalContent = modal.querySelector(".modal-content");
+    if(modalContent) modalContent.scrollTop = 0;
   }
 
   function closeModal() {
+    modal.classList.remove("show");
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
@@ -680,15 +687,19 @@ function initModal() {
   });
 
   closeBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", e => e.target === modal && closeModal());
+  // 배경 클릭 시 닫기 (배경인 .modal을 정확히 클릭했을 때만)
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeModal();
+  });
   document.addEventListener("keydown", e => e.key === "Escape" && closeModal());
 }
 
 /* ==================================================
-  4. 회차 렌더링 (기존 기능 유지)
+  4. 회차 렌더링 (ID 일치화)
 ================================================== */
 function renderEpisodes(seriesId) {
-  const list = document.getElementById("episode-list");
+  // HTML에서 설정한 ID로 변경 (modal-episodes-container)
+  const list = document.getElementById("modal-episodes-container") || document.getElementById("episode-list");
   if (!list) return;
 
   const episodes = EPISODES[seriesId];
@@ -712,10 +723,11 @@ function renderEpisodes(seriesId) {
 }
 
 /* ==================================================
-  5. 에피소드 스크롤 (기존 기능 유지)
+  5. 드래그 스크롤 (대상 변경: modal-content)
 ================================================== */
 function initEpisodeScroll() {
-  const area = document.querySelector(".episode-scroll");
+  // 이제 스크롤의 주체는 .modal-content입니다.
+  const area = document.querySelector(".modal-content");
   if (!area) return;
 
   let isDragging = false;
@@ -723,21 +735,35 @@ function initEpisodeScroll() {
   let scrollTop = 0;
 
   area.addEventListener("mousedown", e => {
+    // 버튼이나 iframe 위에서는 드래그 안 되게 처리
+    if (e.target.closest(".close") || e.target.closest("iframe")) return;
+    
     isDragging = true;
     startY = e.pageY - area.offsetTop;
     scrollTop = area.scrollTop;
-    area.classList.add("dragging");
+    area.style.cursor = "grabbing";
   });
 
   area.addEventListener("mousemove", e => {
     if (!isDragging) return;
+    e.preventDefault();
     const y = e.pageY - area.offsetTop;
-    area.scrollTop = scrollTop - (y - startY) * 1.5;
+    const walk = (y - startY) * 1.5;
+    area.scrollTop = scrollTop - walk;
   });
 
   window.addEventListener("mouseup", () => {
     isDragging = false;
-    area.classList.remove("dragging");
+    area.style.cursor = "grab";
+  });
+}
+/* ==================================================
+  6. iframe 정지 (기존 기능 유지)
+================================================== */
+function stopAllVideos() {
+  document.querySelectorAll("iframe").forEach(iframe => {
+    const src = iframe.src;
+    iframe.src = src; 
   });
 }
 
