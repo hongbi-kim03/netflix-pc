@@ -1183,13 +1183,14 @@
             </div>
 
             <!-- episode 3 -->
-            <div class="episode">
-              <h3>3화 <span class="duration">공개 예정</span></h3>
-              <p><strong>제목:</strong> 2025-09-09 공개</p>
+            <div class="episode coming-soon"> <div class="episode-left">
+              <span class="episode-number">3</span>
+              <div class="no-video">Coming Soon</div> </div>
+            <div class="episode-right">
+              <h3>2025-09-09 공개 예정 <span class="duration">공개 예정</span></h3>
               <p>다음 회차는 9월 9일 공개 예정입니다. 새로운 이야기를 기대해 주세요!</p>
             </div>
           </div>
-        </div>
       </template>
 
       <!-- ✅ 트리거 목록 템플릿 --> 
@@ -1303,19 +1304,33 @@
       <!-- ✅ modal -->
       <div id="image-modal" class="modal">
         <div class="modal-content wide">
-          <span class="close">&times;</span>
+          <button class="close" aria-label="닫기">&times;</button>
 
-          <img id="modal-img" src="#" alt="모달 이미지">
-          <h2 id="modal-title">제목</h2>
-          <p id="modal-description">설명</p>
+          <div class="modal-header-section">
+            <img id="modal-img" src="#" alt="모달 메인 이미지">
+          </div>
 
-          <ul class="meta-info">
-            <li><strong>출연:</strong> <span id="modal-cast"></span></li>
-            <li><strong>장르:</strong> <span id="modal-genre"></span></li>
-            <li><strong>시리즈특징:</strong> <span id="modal-feature"></span></li>
-          </ul>
+          <div class="modal-body-info">
+            <h2 id="modal-title">제목</h2>
+            
+            <div class="info-layout">
+              <div class="description-area">
+                <p id="modal-description">설명</p>
+              </div>
+              
+              <ul class="meta-info">
+                <li><strong>출연:</strong> <span id="modal-cast"></span></li>
+                <li><strong>장르:</strong> <span id="modal-genre"></span></li>
+                <li><strong>시리즈특징:</strong> <span id="modal-feature"></span></li>
+              </ul>
+            </div>
+          </div>
 
-          <div id="modal-episodes-container"></div>
+          <div class="episode-section">
+            <h3 class="episode-title">에피소드</h3>
+            <div id="modal-episodes-container" class="episode-list">
+              </div>
+          </div>
         </div>
       </div>
 
