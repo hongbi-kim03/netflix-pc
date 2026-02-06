@@ -8,7 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
         countElement.textContent = `총 ${wishlist.length}개의 작품을 찜했어요 💖`;
 
         if (wishlist.length === 0) {
-        container.innerHTML = '<p class="empty-message">찜한 콘텐츠가 없습니다.</p>';
+            container.innerHTML = `
+                <div class="empty-message">
+                    <span style="font-size: 3rem;">📝</span>
+                    <p>찜한 콘텐츠가 없습니다.<br>나만의 리스트를 채워보세요!</p>
+                    <a href="index.html" class="explore-btn">새로운 작품 보러 가기</a>
+                </div>`;
         countElement.textContent = '';
         return;
         }
