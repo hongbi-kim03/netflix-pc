@@ -408,14 +408,14 @@ const EPISODES = {
       title: "덱스터",
       duration: "53분",
       desc: "미결 사건 범인 킬러로서의 이중생활을 하는 법의학자 덱스터 모건은 새로운 연쇄 살인범의 작업 형태에 관심을 보인다.",
-      video: "https://www.youtube.com/embed/A9rCQsrpPH4?enablejsapi=1&rel=0"
+      video: "https://www.youtube.com/embed/cYDUE2M5tec?enablejsapi=1&rel=0"
     },
     {
       number: 2,
       title: "악어",
       duration: "54분",
       desc: "살인 혐의에 대해 무죄 판결을 앞둔 남자를 타깃으로 점찍은 덱스터. 얼마 뒤 냉동트럭 살인마가 자신의 이중생활에 대해 알고 있다는 사실을 깨닫는다.",
-      video: "https://www.youtube.com/embed/A9rCQsrpPH4?enablejsapi=1&rel=0"
+      video: "https://www.youtube.com/embed/cYDUE2M5tec?enablejsapi=1&rel=0"
     }
   ],
 
