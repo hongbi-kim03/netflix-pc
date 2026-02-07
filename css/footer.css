@@ -1,194 +1,193 @@
-/* 전체 배경 영역 */
-.footer {
-    margin: 0 auto;
-    padding: 80px 0 60px;
-    font-size: 14px;
-    color: #fff;
-    line-height: 1.6;
-}
+    /* =========================
+    Footer 전체 배경 및 레이아웃
+   ========================= */
+    .footer {
+        font-size: 14px;
+        color: #fff;
+        line-height: 1.6;
+        background: #000;
+        padding-top: 20px;
+    }
 
-/* 전체 배경 영역 */
-.footer-inner {
-    width: 1280px;
-    margin: 0 auto;
-    padding: 0 40px;
-}
+    /* ✅ 중앙 정렬을 위한 컨테이너 */
+    .footer-inner {
+        max-width: 1280px; /* PC 고정폭 */
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 내부의 모든 요소를 가로 중앙으로 */
+    }
 
-.footer a {
-    color: #aaa;
-    text-decoration: none;
-    transition: color 0.3s;
-}
+    .footer a {
+        color: #aaa;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
 
-.footer a:hover {
-    color: #fff;
-}
+    .footer a:hover {
+        color: #fff;
+    }
 
-/* =========================
-Footer Menu
-========================= */
-.footer-menu {
-    padding-bottom: 24px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 32px;
-}
+    /* =========================
+    Footer Menu(상단 메뉴)
+    ========================= */
+    .footer-menu {
+        width: 100%;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 20px;
+    }
 
-.footer-menu ul {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 12px 24px;
-    padding: 0;
-    margin: 0;
-}
+    .footer-menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* 메뉴 가로 중앙 정렬 */
+        gap: 12px 40px;
+        list-style: none;
+        padding: 0;
+    }
 
-.footer-menu li {
-    list-style: none;
-}
+    .footer-menu li a {
+        font-weight: 500;
+        color: #999;
+    }
 
-.footer-menu li a {
-    text-decoration: none;
-    color: #999;
-    font-weight: 500;
-}
+    /* =========================
+    Footer Middle(로고 및 회사 정보)
+    ========================= */
+    .footer-middle {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
 
-.footer-menu li a:hover {
-    color: #fff;
-}
+    /* logo  (로고 이미지 + 텍스트)*/
+    .footer-icon {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
 
-/* =========================
-Footer Middle
-========================= */
-.footer-middle {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 32px;
-}
+    .footer-icon img {
+        width: 100px;
+        margin-bottom: 8px;
+    }
 
-/* logo (로고 이미지 + 텍스트)*/
-.footer-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 40px;
-}
+    .footer-icon p {
+        font-size: 12px;
+        color: #777;
+    }
 
-.footer-icon img {
-    width: 100px;
-    margin-bottom: 8px;
-}
+    /* 회사 정보 텍스트 */
+    .footer-info {
+        max-width: 780px;
+        color: #ccc;
+        font-size: 13px;
+    }
 
-.footer-icon p {
-    font-size: 12px;
-    color: #777;
-}
+    .footer-info p {
+        margin-bottom: 6px;
+    }
 
-.footer-info {
-    max-width: 780px;
-    color: #ccc;
-    font-size: 13px;
-    line-height: 1.6;
-}
+    /* =========================
+    3. Footer Bottom (SNS 및 유틸리티)
+    ========================= */
+    .footer-bottom {
+        width: 100%;
+        display: flex;
+        flex-direction: column; /* SNS 아래에 검색창 배치 */
+        align-items: center;
+        gap: 30px;
+        margin-top: 40px;
+    }
 
-/* sns */
-.footer-sns {
-    margin-top: 12px;
-    display: flex;
-    gap: 12px;
-    flex-shrink: 0;
-}
+    /* SNS 아이콘 */
+    .footer-sns {
+        display: flex;
+        gap: 12px;
+        /* align-items: flex-start; */
+    }
 
-.footer-sns img {
-    width: 28px;
-    height: 28px;
-    opacity: 0.8;
-    transition: filter 0.3s;
-}
+    .footer-sns img {
+        width: 28px;
+        height: 28px;
+        opacity: 0.8;
+        transition: opacity 0.3s, transform 0.3s;
+    }
 
-.footer-sns img:hover {
-    opacity: 1;
-}
+    .footer-sns img:hover {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
 
-/* =========================
-Footer Bottom
-========================= */
-.footer-bottom {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 24px;
-    margin-top: 40px;
-}
+    /* 언어 선택 및 검색창 컨테이너 */
+    .footer-utils {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 
-.footer-utils {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
+    /* 언어 표시 */
+    .footer-language {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+    }
 
-/* =========================
-Language Selector
-========================= */
-.footer-language {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 18px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #fff;
-}
+    .footer-language-code {
+        color: #ddd;
+    }
 
-.footer-language-icon {
-    font-size: 16px;
-}
+    /* 검색창 */
+    .footer-search {
+        position: relative;
+        width: 260px;
+    }
 
-.footer-language-sep {
-    opacity: 0.4;
-}
+    /* 입력창 */
+    .footer-search input {
+        width: 100%;
+        padding: 10px 40px 10px 14px;
+        border: 1px solid #333;
+        border-radius: 20px;
+        font-size: 14px;
+        background: #111;
+        color: #fff;
+        outline: none;
+    }
 
-.footer-language-code {
-    color: #ddd;
-}
+    .footer-search input::placeholder {
+        color: #777;
+    }
 
-/* =========================
-    Search
-========================= */
-.footer-search {
-    position: relative;
-    width: 240px;
-}
+    /*🔍  검색 버튼 */
+    .footer-search button {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        font-size: 18px;
+        color: #777;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        transition: opacity 0.2s;
+    }
 
-.footer-search input {
-    padding: 10px 40px 10px 14px;
-    border: 1px solid #333;
-    border-radius: 20px;
-    font-size: 14px;
-    background: #111;
-    color: #fff;
-}
+    .footer-search button:hover {
+        color: #fff; /* 호버 시 아이콘 밝게 */
+    }
 
-.footer-search button {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 16px;
-    color: #777;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s, color 0.2s;
-}
-
-.footer-search input:focus+button,
-.footer-search input:not(:placeholder-shown)+button {
-    opacity: 1;
-    pointer-events: auto;
-}
+    /* input에 글자가 있거나 포커스 시 버튼 보임 */
+    .footer-search input:focus+button,
+    .footer-search input:not(:placeholder-shown)+button {
+        opacity: 1;
+        pointer-events: auto;
+    }

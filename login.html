@@ -6,7 +6,7 @@
         <title>Netflix Clone – 로그인</title>
         <link rel="stylesheet" href="css/fonts.css">
         <link rel="stylesheet" href="css/login.css">
-        <link rel="stylesheet" href="css/footer-login.css">
+        <link rel="stylesheet" href="css/footer.css">
 
 
     </head>
@@ -62,6 +62,7 @@
     
     <!-- ✅ footer -->
     <footer class="footer">
+        <div class="footer-inner">
 
         <!-- footer menu -->
         <nav class="footer-menu">
@@ -80,12 +81,12 @@
         <!-- footer middle -->
         <div class="footer-middle">
             <div class="footer-icon">
-                <img src="images/icon.png" alt="NETFLIX 아이콘">
+                <img src="images/icon.png" alt="넷플릭스 아이콘">
                 <p>© Netflix Clone</p>
             </div>
 
             <div class="footer-info">
-                <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 ( 부담)</p>
+                <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 00-308-321-0161 (수신자 부담)</p>
                 <p>대표: 레지널드 숀 톰프슨</p>
                 <p>이메일 주소: korea@netflix.com</p>
                 <p>주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161</p>
@@ -93,10 +94,11 @@
                 <p>클라우드 호스팅: Amazon Web Services Inc.</p>
                 <p>공정거래위원회 웹사이트</p>
             </div>
-        </div>  
+        </div>
 
         <!-- footer bottom -->
         <div class="footer-bottom">
+
             <!-- SNS -->
             <div class="footer-sns">
                 <a href="https://www.instagram.com/netflixkr/" target="_blank"><img src="images/footer-instagram.png" alt="인스타그램"></a>
@@ -107,23 +109,26 @@
 
             <!-- utils (language + search) -->
             <div class="footer-utils">
+
                 <!-- language display -->
                 <div class="footer-language">
                     <span class="footer-language-icon">🌐</span>
                     <span class="footer-language-code">KR</span>
-                    <span class="footer-language__sep">·</span>
+                    <span class="footer-language-sep">·</span>
                     <span class="footer-language-code">EN</span>
                 </div>
 
                 <!-- search -->
                 <div class="footer-search">
-                    <input type="text" placeholder="위치찾기" />
-                    <button aria-label="search">🔍</button>
+                    <form action="location.html">
+                        <input type="text" placeholder="위치찾기" />
+                        <button type="submit" aria-label="search" >🔍</button>
+                    </form>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script src="js/login.js"></script>
 </body>
 </html>
-<script src="js/login.js"></script>
