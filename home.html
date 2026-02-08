@@ -1,27 +1,31 @@
 <!DOCTYPE html>
-    <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Netflix Clone – 홈</title>
-        <link rel="stylesheet" href="css/fonts.css">
-        <link rel="stylesheet" href="css/home.css">
-        <link rel="stylesheet" href="css/footer.css">
-    </head>
-    <body>
-    <!-- html 시작 -->
-    <header>
-        <a href="home.html" class="logo">
-            <img src="images/logo.png" alt="넷플릭스 로고">
-        </a>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Netflix Clone – 홈</title>
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/footer.css">
 
-        <nav class="gnb">
-            <ul>
-                <li><a href="language.html">언어</a></li>
-                <li><a href="login.html">로그인/회원가입</a></li>
-            </ul>
-        </nav>
+</head>
 
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="넷플릭스 로고">
+            </a>
+
+            <nav class="gnb" aria-label="메인 메뉴">
+                <ul>
+                    <li><a href="language.html">언어</a></li>
+                    <li><a href="login.html">로그인/회원가입</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     
     <!-- main -->
@@ -29,66 +33,89 @@
     <section class="hero-section with-background">
         <div class="hero-overlay">
             <div class="hero-content">
-            <h1>영화, 시리즈 등을 무제한으로</h1>
-            <p class="sub-text">7,000원으로 시작하세요. 멤버십은 언제든지 해지 가능합니다.</p>
-            <p class="guide-text">
-                시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면<br />
-                이메일 주소를 입력하세요.
-            </p>
-            <form class="hero-form">
-                <input type="email" placeholder="이메일 주소" required />
-                <button type="submit">시작하기 &gt;</button>
-            </form>
+                <h1>영화, 시리즈 등을 무제한으로</h1>
+                <p class="sub-text">
+                    7,000원으로 시작하세요. 멤버십은 언제든지 해지 가능합니다.
+                </p>
+                <p class="guide-text">
+                    시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면<br />
+                    이메일 주소를 입력하세요.
+                </p>
+                <form class="hero-form">
+                    <input type="email" placeholder="이메일 주소" required />
+                    <button type="submit">시작하기 &gt;</button>
+                </form>
+            </div>
         </div>
-    </div>
     </section>
 
     <!-- 숏폼 콘텐츠 -->
-    <section class="shortform-conten-wrapper">
+    <section class="shortform-content-wrapper">
         <h2 class="section-title">🔥 인기 숏폼 콘텐츠 모음 🔥</h2>
 
-        <div class="shortform-content">
-            <div class="slide">
-                <iframe 
-                    src="https://www.youtube.com/embed/kQdEHQLHDAI?enablejsapi=1&rel=0&autoplay=0"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen>
-                </iframe>
-            </div>
+        <div class="shortform-inner" >
+            <div class="shortform-content">
 
-            <div class="slide">
-                <iframe 
-                    src="https://www.youtube.com/embed/7QwY92QrZ00?enablejsapi=1&rel=0"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen>
-                </iframe>
-            </div>
+                <!-- 숏폼 카드 1 -->
+                <div class="slide"data-video-id="2T19384cd3s">
+                    <div class="thumbnail"></div>
+                    <iframe src="https://www.youtube.com/embed/2T19384cd3s?enablejsapi=1&rel=0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
-            <div class="slide">
-                <iframe src="https://www.youtube.com/embed/ic2063VIGDE?enablejsapi=1&rel=0"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen>
-                </iframe>
-            </div>
+                <!-- 숏폼 카드 2 -->
+                <div class="slide"data-video-id="vHva0Cr5tO0">
+                    <div class="thumbnail"></div>
+                    <iframe src="https://www.youtube.com/embed/vHva0Cr5tO0?enablejsapi=1&rel=0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
-            <div class="slide">
-                <iframe src="https://www.youtube.com/embed/xQnsFqn44uo?enablejsapi=1&rel=0"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen>
-                </iframe>
-            </div>
+                <!-- 숏폼 카드 3 -->
+                <div class="slide"data-video-id="ausCWLolX3I">
+                    <div class="thumbnail"></div>
+                    <iframe src="https://www.youtube.com/embed/ausCWLolX3I?enablejsapi=1&rel=0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
 
-            <div class="slide">
-                <iframe src="https://www.youtube.com/embed/nhPWOV02-G0?enablejsapi=1&rel=0"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen>
-                </iframe>
+                <!-- 숏폼 카드 4 -->
+                <div class="slide"data-video-id="xQnsFqn44uo">
+                    <div class="thumbnail"></div>
+                    <iframe src="https://www.youtube.com/embed/xQnsFqn44uo?enablejsapi=1&rel=0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- 숏폼 카드 5 -->
+                <div class="slide"data-video-id="wZq_QypWnWo">
+                    <div class="thumbnail"></div>
+                    <iframe src="https://www.youtube.com/embed/wZq_QypWnWo?enablejsapi=1&rel=0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- 숏폼 카드 6 -->
+                <div class="slide"data-video-id="N8CvVBTStXc">
+                    <div class="thumbnail"></div>
+                    <iframe src="https://www.youtube.com/embed/N8CvVBTStXc?enablejsapi=1&rel=0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ✅ footer -->
     <footer class="footer">
+        <div class="footer-inner">
 
         <!-- footer menu -->
         <nav class="footer-menu">
@@ -144,16 +171,17 @@
                     <span class="footer-language-code">EN</span>
                 </div>
 
-                    <!-- search -->
-                    <div class="footer-search">
+                <!-- search -->
+                <div class="footer-search">
+                    <form action="location.html">
                         <input type="text" placeholder="위치찾기" />
-                        <button aria-label="search">🔍</button>
-                    </div>
+                        <button type="submit" aria-label="search" >🔍</button>
+                    </form>
                 </div>
             </div>
         </div>
     </footer>
 
-<script src="js/home.js"></script>
+    <script src="js/home.js"></script>
 </body>
 </html>
