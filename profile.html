@@ -6,26 +6,29 @@
   <title>프로필 페이지</title>
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
   <header class="header">
-    <div class="logo">
-      <img src="images/logo.png" alt="넷플릭스 로고" />
-    </div>
-
-    <div class="profile">
-      <div class="profile-toggle" id="profile-btn">
-        <img src="images/icon-profile.png" alt="프로필 아이콘"/>
-        <span class="arrow">▼</span>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="images/logo.png" alt="넷플릭스 로고" />
       </div>
-      <div class="dropdown-menu" id="dropdown">
-        <ul>
-          <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
-          <li><a href="account.html">계정</a></li>
-          <li><a href="profile.html">프로필 관리</a></li>
-          <li><a href="help-center.html">고객 센터</a></li>
-          <li><a href="logout.html">로그아웃</a></li>
-        </ul>
+
+      <div class="profile">
+        <div class="profile-toggle" id="profile-btn">
+          <img src="images/icon-profile.png" alt="프로필 아이콘"/>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="dropdown-menu" id="dropdown">
+          <ul>
+            <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
+            <li><a href="account.html">👤 계정</a></li>
+            <li><a href="profile.html">⚙️ 프로필 관리</a></li>
+            <li><a href="help-center.html">❓ 고객 센터</a></li>
+            <li><a href="logout.html">🚪 로그아웃</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -43,50 +46,46 @@
 
     <section class="account-content">
       <h1>프로필</h1>
+      <div class="profiles">
+        <!-- 프로필 1 -->
+        <h2 class="profile-subtitle">프로필 설정</h2>
 
-    <div class="profiles">
+        <div class="profile-item">
+          <img src="images/icon-profile.png" alt="프로필01" />
+          <span class="profile-name">김홍비</span>
+          <span class="current-profile-tag" >현재 프로필</span>
+          <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
+        </div>
 
-    <!-- 프로필 1 -->
-    <h2 class="profile-subtitle">프로필 설정</h2>
-    <div class="profile-item">
-      <img src="images/icon-profile.png" alt="프로필01" />
-      <span class="profile-name">김홍비</span>
+        <!-- 프로필 2 -->
+        <div class="profile-item">
+          <img src="images/profile01.png" alt="프로필02" />
+          <span class="profile-name">김홍비</span>
+          <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
+          <button class="delete-profile-btn">✕</button>
+        </div>
 
-      <span class="current-profile-tag" >현재 프로필</span>
+        <!-- 프로필 3 -->
+        <div class="profile-item">
+          <img src="images/profile02.png" alt="프로필03" />
+          <span class="profile-name">김홍비</span>
+          <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
+          <button class="delete-profile-btn">✕</button>
+        </div>
 
-      <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
-    </div>
+        <!-- 프로필 4 -->
+        <div class="profile-item">
+          <img src="images/profile03.png" alt="프로필04" />
+          <span class="profile-name">김홍비</span>
+          <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
+          <button class="delete-profile-btn">✕</button>
+        </div>
 
-    <!-- 프로필 2 -->
-    <div class="profile-item">
-      <img src="images/profile01.png" alt="프로필02" />
-      <span class="profile-name">김홍비</span>
-      <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
-      <button class="delete-profile-btn">✕</button>
-    </div>
-    
-    <!-- 프로필 3 -->
-    <div class="profile-item">
-      <img src="images/profile02.png" alt="프로필03" />
-      <span class="profile-name">김홍비</span>
-      <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
-      <button class="delete-profile-btn">✕</button>
-    </div>
-
-    <!-- 프로필 4 -->
-    <div class="profile-item">
-      <img src="images/profile03.png" alt="프로필04" />
-      <span class="profile-name">김홍비</span>
-      <button class="profile-settings-btn" onclick="location.href='profile-settings.html'">▶</button>
-      <button class="delete-profile-btn">✕</button>
-    </div>
-
-    <!-- 프로필 추가 버튼-->
-    <button class="add-profile" id="add-profile">프로필 추가</button>
-    </div>
-</section>
-
-</main>
+        <!-- 프로필 추가 버튼-->
+        <button class="add-profile" id="add-profile">프로필 추가</button>
+      </div>
+    </section>
+  </main>
 
   <!-- 프로필 모달 -->
   <div class="modal" id="modal">
@@ -149,5 +148,5 @@
   </footer>
 
   <script src="js/profile.js"></script>
-  </body>
+</body>
 </html>
