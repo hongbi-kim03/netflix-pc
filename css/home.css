@@ -4,57 +4,6 @@
     margin: 0 auto;
   } 
 
-  /* header */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%; 
-    height: 60px;
-    z-index: 10;
-    display: flex;
-    background-color: rgba(88, 53, 102, 0.5);
-    backdrop-filter: blur(4px);
-    border-bottom: 1px solid rgba(200, 180, 200, 0.4); 
-    align-items: center;
-    padding: 0 20px;
-    justify-content: space-between;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);  
-    flex-wrap: nowrap; /* 💡 줄바꿈 방지 */
-  }
-
-  /* 로고 */
-  .logo img {
-    cursor: pointer;
-  }
-
-  /* gnb  */
-  nav.gnb {
-    flex: 1;
-    margin-left: 40px;
-    white-space: nowrap;
-  }
-
-  nav.gnb ul {
-    display: flex;
-    list-style: none;
-    gap: 25px;
-    white-space: nowrap;  
-  }
-
-  nav.gnb ul li a {
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    padding: 8px 0;
-    transition: color 0.3s;
-  }
-
-  nav.gnb ul li a:hover {
-    color: #e50914;
-  }
-
   /* 메인 랜딩 페이지 (Hero Section) */
   .hero-section.with-background {
     background-image: url("../images/hero-main-bg.png");
@@ -81,14 +30,14 @@
 
   .hero-content {
     width: 1280px;          /* PC 고정 폭 */
-    margin: 0 auto;
+    margin: 0 auto;         /* 중앙 정렬 */
     text-align: center;
     max-width: 700px;
     margin: 0 auto;
   }
 
   .hero-content h1 {
-    font-size: 40px;
+    font-size: 50px;  /* 폰트 크기를 조금 더 키워 가독성 확보 */
     margin-bottom: 20px;
     font-weight: bold;
     white-space: nowrap;

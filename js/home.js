@@ -1,48 +1,62 @@
-/* ================================
-🎬 숏폼 콘텐츠 자동재생
-================================ */
-    function postMessageToIframe(iframe, command) {
-    if (!iframe || !iframe.contentWindow) return;
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof initHoverVideo === 'function') initHoverVideo();
+    
+});
 
+/* ================================
+📩 YouTube iframe 제어
+================================ */
+function postMessageToIframe(iframe, command) {
+    if (!iframe || !iframe.contentWindow) return;
     iframe.contentWindow.postMessage(
-        JSON.stringify({
-        event: 'command',
-        func: command,
-        args: []
-        }),
+        JSON.stringify({ event: 'command', func: command, args: [] }),
         '*'
     );
-    }
+}
 
-    const slides = document.querySelectorAll('.slide');
-    let activeSlide = null;
+/* ================================
+🎬 넷플릭스 스타일 hover 비디오
+================================ */
+function initHoverVideo() {
+    const videoItems = document.querySelectorAll('[data-video-id]');
+    let activeItem = null;
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    slides.forEach(slide => {
-    const iframe = slide.querySelector('iframe');
-    const thumbnail = slide.querySelector('.thumbnail');
-    const videoId = slide.dataset.videoId;
+    videoItems.forEach(item => {
+        const iframe = item.querySelector('iframe');
+        const thumbnail = item.querySelector('.thumbnail');
+        const videoId = item.dataset.videoId;
+        if (!iframe || !thumbnail) return;
 
-    /* 썸네일 자동 설정 */
-    thumbnail.style.backgroundImage =
-        `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
+        thumbnail.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
 
-    slide.addEventListener('mouseenter', () => {
-        if (activeSlide && activeSlide !== slide) {
-        activeSlide.classList.remove('playing');
-        postMessageToIframe(
-            activeSlide.querySelector('iframe'),
-            'pauseVideo'
-        );
+        const playVideo = (target) => {
+            if (activeItem && activeItem !== target) stopVideo(activeItem);
+            target.classList.add('playing');
+            postMessageToIframe(target.querySelector('iframe'), 'playVideo');
+            activeItem = target;
+        };
+
+        const stopVideo = (target) => {
+            target.classList.remove('playing');
+            postMessageToIframe(target.querySelector('iframe'), 'pauseVideo');
+            if (activeItem === target) activeItem = null;
+        };
+
+        if (isTouchDevice) {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                item.classList.contains('playing') ? stopVideo(item) : playVideo(item);
+            });
+        } else {
+            item.addEventListener('mouseenter', () => playVideo(item));
+            item.addEventListener('mouseleave', () => stopVideo(item));
         }
-
-        slide.classList.add('playing');
-        postMessageToIframe(iframe, 'playVideo');
-        activeSlide = slide;
     });
 
-    slide.addEventListener('mouseleave', () => {
-        slide.classList.remove('playing');
-        postMessageToIframe(iframe, 'pauseVideo');
-        activeSlide = null;
-    });
-});
+    if (isTouchDevice) {
+        document.addEventListener('touchstart', (e) => {
+            if (activeItem && !activeItem.contains(e.target)) stopVideo(activeItem);
+        });
+    }
+}
