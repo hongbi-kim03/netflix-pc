@@ -112,26 +112,20 @@ body {
   margin-bottom: 24px;
 }
 
-/* 카드형 박스 */
-.membership-box,
-.quick-links,
-.profile-list {
+/* 멤버십 */
+.membership-box {
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   padding: 24px;
   margin-bottom: 32px;
-  transition: transform 0.2s, box-shadow 0.2s;
-
-  background: rgba(255, 255, 255, 0.05); /* 완전 투명보다 살짝 밝은 블랙 */
-  backdrop-filter: blur(15px);
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.08); /* 0.05보다 아주 살짝 더 밝음 */
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff; /* 모든 글자는 화이트로! */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(161, 66, 244, 0.1); /* 강조를 위해 보라색 빛을 살짝 섞은 그림자 추천 */
+  color: white;
 }
 
-.membership-box:hover,
-.quick-links:hover,
-.profile-list:hover {
+.membership-box:hover{
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
@@ -140,10 +134,14 @@ body {
   display: inline-block;
   background-color: #a142f4;
   color: #fff;
-  font-size: 12px;
-  padding: 4px 10px;
+  font-size: 11px; /* 조금 더 작게 하면 세련돼 보임 */
+  font-weight: 700;
+  padding: 4px 12px;
   border-radius: 999px;
   margin-bottom: 10px;
+  /* 살짝 빛나는 효과 추가 */
+  box-shadow: 0 0 10px rgba(161, 66, 244, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .membership-box h2 {
@@ -170,10 +168,21 @@ body {
 
 /* 빠른 링크 */
 .quick-links {
-  padding: 25px;
   border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 24px;
+  margin-bottom: 32px;
+  transition: transform 0.2s ease;
+  background: rgba(255, 255, 255, 0.05); /* 완전 투명보다 살짝 밝은 블랙 */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 35px;
+  color: white;
+}
+
+.quick-links:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 /* 제목 */
@@ -208,15 +217,31 @@ body {
   transition: background 0.2s;
 }
 
+.quick-links li:first-child a {
+  border-top: none;
+}
+
 .quick-links-list a:hover {
   padding-left: 20px; /* 살짝 밀리는 애니메이션 추가 */
 }
 
 /* 프로필 관리 */
 .profile-list {
-  background: rgba(255, 255, 255, 0.03); /* 조금 더 투명하게 */
-  border-radius: 8px;
-  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 24px;
+  margin-bottom: 32px;
+  transition: transform 0.2s ease;
+  background: rgba(255, 255, 255, 0.05); /* 완전 투명보다 살짝 밝은 블랙 */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  color: white;
+}
+
+.profile-list:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 /* 프로필 이미지 호버 시 포인트 */
@@ -232,7 +257,19 @@ body {
 
 .profile-list .profiles {
   display: flex;
-  gap: 10px;
+  justify-content: space-between; 
+  align-items: center;
+  gap: 15px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  padding: 12px 10px;
+  background-color: rgba(255, 255, 255, 0.08); /* 어두운 배경에 맞는 반투명 화이트 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none; 
+  /* 기존 border-bottom 제거 */
+  margin-bottom: 10px; 
+  /* 아이템 간 간격 확보 */
 }
 
 .profile-list .profiles img {
