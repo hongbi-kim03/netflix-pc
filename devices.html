@@ -4,29 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>액세스 및 디바이스 관리</title>
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/devices.css">
+    <link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
-        <header class="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo.png" alt="넷플릭스 로고" />
-            </a>
-        </div>
-
-        <div class="profile">
-            <div class="profile-toggle" id="profile-btn">
-                <img src="images/icon-profile.png" alt="프로필 아이콘"/>
-                <span class="arrow">▼</span>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="넷플릭스 로고" />
+                </a>
             </div>
-            <div class="dropdown-menu" id="dropdown">
-                <ul>
-                    <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
-                    <li><a href="account.html">계정</a></li>
-                    <li><a href="profile.html">프로필 관리</a></li>
-                    <li><a href="help-center.html">고객 센터</a></li>
-                    <li><a href="logout.html">로그아웃</a></li>
-                </ul>
+
+            <div class="profile">
+                <div class="profile-toggle" id="profile-btn">
+                    <img src="images/icon-profile.png" alt="프로필 아이콘"/>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown-menu" id="dropdown">
+                    <ul>
+                        <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
+                        <li><a href="account.html">👤 계정</a></li>
+                        <li><a href="profile.html">⚙️ 프로필 관리</a></li>
+                        <li><a href="help-center.html">❓ 고객 센터</a></li>
+                        <li><a href="logout.html">🚪 로그아웃</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -106,7 +110,7 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer>
         <div class="footer-container">
             <p class="footer-question">
                 질문이 있으신가요? <a href="help-center.html">고객 센터에 문의하세요</a>
@@ -134,6 +138,7 @@
             </div>
         </div>
     </footer>
+
     <script src="js/devices.js"></script>
 </body>
 </html>
