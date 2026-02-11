@@ -2,15 +2,15 @@
     DOM READY
 ================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-
     initProfileDropdown();
     initTabs();
     initFavoriteButton();
     initShareButton();
-    initReviewWrite();
-    initTrailerSlider();
-    initStillcutSlider();
-
+    initReviewSystem(); // 리뷰 관련 통합 초기화
+    
+    // 슬라이더 통합 초기화
+    initDragSlider('.trailer-slider');
+    initDragSlider('.stillcut-slider');
 });
 
 /* ==================================================
@@ -88,29 +88,28 @@ function initShareButton() {
 }
 
 /* ==================================================
-    5. 관람평 작성 + 동기화
+    5. 관람평 시스템 (작성/렌더링/삭제/좋아요 통합)
 ================================================== */
-function initReviewWrite() {
-
+function initReviewSystem() {
     const reviewLists = document.querySelectorAll('.review-list');
-    if (!reviewLists.length) return;
-
     const STORAGE_KEY = 'userReviews';
 
-    /* 저장된 리뷰 불러오기 */
-    loadStoredReviews();
+    // 1. 초기 멘트 설정
+    const DEFAULT_MSG = "관람평을 남겨주세요.";
+    const FOCUS_MSG = "비방이나 욕설은 자제해주세요. (최대 300자)";
 
+    // 저장된 리뷰 불러오기
+    // loadStoredReviews();
+
+    // [리뷰 작성 관련]
     document.querySelectorAll('.review-write').forEach((reviewSection) => {
-
         const textarea = reviewSection.querySelector('.review-input');
         const countText = reviewSection.querySelector('.text-count');
         const cancelBtn = reviewSection.querySelector('.btn-cancel');
         const submitBtn = reviewSection.querySelector('.btn-submit');
         const ratingInputs = reviewSection.querySelectorAll('input[name="rating"]');
 
-        textarea.addEventListener('focus', () => {
-            reviewSection.classList.add('active');
-        });
+        textarea.addEventListener('focus', () => reviewSection.classList.add('active'));
 
         textarea.addEventListener('input', () => {
             const length = textarea.value.length;
@@ -130,7 +129,7 @@ function initReviewWrite() {
             const reviewData = {
                 id: Date.now(),
                 user: 'user123',
-                rating,
+                rating: parseInt(rating),
                 content,
                 date: getToday()
             };
@@ -149,9 +148,30 @@ function initReviewWrite() {
         }
     });
 
-    /* ===============================
-    6. 저장 / 불러오기
-    =============================== */
+    // [리뷰 리스트 이벤트 위임: 삭제 및 좋아요]
+    reviewLists.forEach(list => {
+        list.addEventListener('click', (e) => {
+            const card = e.target.closest('.review-card');
+            if (!card) return;
+            const id = Number(card.dataset.id);
+
+            // 삭제 버튼 클릭 시
+            if (e.target.classList.contains('btn-delete')) {
+                if (!confirm('이 관람평을 삭제할까요?')) return;
+                
+                const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY)) || [];
+                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(stored.filter(r => r.id !== id)));
+                document.querySelectorAll(`.review-card[data-id="${id}"]`).forEach(el => el.remove());
+            }
+
+            // 좋아요 버튼 클릭 시
+            if (e.target.classList.contains('btn-like')) {
+                let count = parseInt(e.target.textContent.replace(/[^0-9]/g, "")) || 0;
+                e.target.textContent = `👍 ${count + 1}`;
+            }
+        });
+    });
+
     function saveReview(review) {
         const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY)) || [];
         stored.unshift(review);
@@ -163,15 +183,11 @@ function initReviewWrite() {
         stored.forEach(renderReview);
     }
 
-    /* ===============================
-    7. 렌더링 (모든 리스트 동기화)
-    =============================== */
     function renderReview({ id, user, rating, content, date }) {
         reviewLists.forEach(list => {
             const li = document.createElement('li');
             li.className = 'review-card';
             li.dataset.id = id;
-
             li.innerHTML = `
                 <div class="review-inner">
                     <div class="review-avatar">
@@ -179,8 +195,8 @@ function initReviewWrite() {
                     </div>
                     <div class="review-content">
                         <div class="review-top">
-                            <span class="review-user">${user}</span>
-                            <span class="review-date">${date}</span>
+                            <span class="user-name">${user}</span>
+                            <span class="date">${date}</span>
                         </div>
                         <div class="review-rating">
                             ${renderStars(rating)} <span class="score">${rating}.0</span>
@@ -188,7 +204,7 @@ function initReviewWrite() {
                         <p class="review-text">${content}</p>
                         <div class="review-actions">
                             <button class="btn-like">👍 0</button>
-                            <button class="btn-delete">취소</button>
+                            <button class="btn-delete">삭제</button>
                         </div>
                     </div>
                 </div>
@@ -197,32 +213,8 @@ function initReviewWrite() {
         });
     }
 
-    /* ===============================
-    8. 삭제 (동기화)
-    =============================== */
-    reviewLists.forEach(list => {
-        list.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('btn-delete')) return;
-
-            const card = e.target.closest('.review-card');
-            const id = Number(card.dataset.id);
-
-            if (!confirm('이 관람평을 삭제할까요?')) return;
-
-            const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY)) || [];
-            sessionStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify(stored.filter(r => r.id !== id))
-            );
-
-            document
-                .querySelectorAll(`.review-card[data-id="${id}"]`)
-                .forEach(el => el.remove());
-        });
-    });
-
     function renderStars(score) {
-        return '★★★★★☆☆☆☆☆'.slice(5 - score, 10 - score);
+        return '★'.repeat(score) + '☆'.repeat(5 - score);
     }
 
     function getToday() {
@@ -232,10 +224,10 @@ function initReviewWrite() {
 }
 
 /* ==================================================
-    9. 예고편 슬라이더
+    6. 공통 드래그 슬라이더 (예고편 & 스틸컷)
 ================================================== */
-function initTrailerSlider() {
-    const slider = document.querySelector('.trailer-slider');
+function initDragSlider(selector) {
+    const slider = document.querySelector(selector);
     if (!slider) return;
 
     let isDragging = false;
@@ -251,14 +243,14 @@ function initTrailerSlider() {
 
     const momentum = () => {
         slider.scrollLeft += velocity;
-        velocity *= 0.92;
-        if (Math.abs(velocity) > 0.4) {
+        velocity *= 0.92; // 감속 계수
+        if (Math.abs(velocity) > 0.5) {
             rafId = requestAnimationFrame(momentum);
         }
     };
 
     slider.addEventListener('mousedown', (e) => {
-        if (e.target.tagName === 'IFRAME') return;
+        if (e.target.tagName === 'IFRAME') return; // 유튜브 재생 방해 방지
         isDragging = true;
         slider.classList.add('dragging');
         startX = e.pageX;
@@ -269,7 +261,7 @@ function initTrailerSlider() {
     slider.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         const prev = slider.scrollLeft;
-        slider.scrollLeft = scrollStart - (e.pageX - startX) * 1.05;
+        slider.scrollLeft = scrollStart - (e.pageX - startX) * 1.2; // 감도 조절
         velocity = slider.scrollLeft - prev;
     });
 
@@ -280,60 +272,7 @@ function initTrailerSlider() {
         momentum();
     };
 
+    // 마우스가 영역을 벗어나거나 뗐을 때 모두 처리
     slider.addEventListener('mouseup', endDrag);
     slider.addEventListener('mouseleave', endDrag);
 }
-
-/* ==================================================
-    10. 스틸컷 슬라이더
-================================================== */
-function initStillcutSlider() {
-    const slider = document.querySelector('.stillcut-slider');
-    if (!slider) return;
-
-    let isDragging = false;
-    let startX = 0;
-    let scrollStart = 0;
-    let velocity = 0;
-    let rafId;
-
-    const stopMomentum = () => {
-        cancelAnimationFrame(rafId);
-        velocity = 0;
-    };
-
-    const momentum = () => {
-        slider.scrollLeft += velocity;
-        velocity *= 0.92;
-        if (Math.abs(velocity) > 0.4) {
-            rafId = requestAnimationFrame(momentum);
-        }
-    };
-
-    slider.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        slider.classList.add('dragging');
-        startX = e.pageX;
-        scrollStart = slider.scrollLeft;
-        stopMomentum();
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        const prev = slider.scrollLeft;
-        slider.scrollLeft = scrollStart - (e.pageX - startX) * 1.05;
-        velocity = slider.scrollLeft - prev;
-    });
-
-    const endDrag = () => {
-        if (!isDragging) return;
-        isDragging = false;
-        slider.classList.remove('dragging');
-        momentum();
-    };
-
-    slider.addEventListener('mouseup', endDrag);
-    slider.addEventListener('mouseleave', endDrag);
-}
-
-

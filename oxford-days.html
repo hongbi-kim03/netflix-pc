@@ -4,31 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>옥스퍼드에서의날들 상세정보</title>
-    <link rel="stylesheet" href="css/detail.css">
     <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/detail.css">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo.png" alt="넷플릭스 로고" />
-            </a>
-        </div>
-
-        <div class="profile">
-            <div class="profile-toggle" id="profile-btn">
-                <img src="images/icon-profile.png" alt="프로필 아이콘"/>
-                <span class="arrow">▼</span>
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="넷플릭스 로고" />
+                </a>
             </div>
-            <div class="dropdown-menu" id="dropdown">
-                <ul>
-                    <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
-                    <li><a href="account.html">계정</a></li>
-                    <li><a href="profile.html">프로필 관리</a></li>
-                    <li><a href="help-center.html">고객 센터</a></li>
-                    <li><a href="logout.html">로그아웃</a></li>
-                </ul>
+
+            <div class="profile">
+                <div class="profile-toggle" id="profile-btn">
+                    <img src="images/icon-profile.png" alt="프로필 아이콘"/>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown-menu" id="dropdown">
+                    <ul>
+                        <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
+                        <li><a href="account.html">👤 계정</a></li>
+                        <li><a href="profile.html">⚙️ 프로필 관리</a></li>
+                        <li><a href="help-center.html">❓ 고객 센터</a></li>
+                        <li><a href="logout.html">🚪 로그아웃</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -55,18 +58,9 @@
         <!-- 평점 / 예매율 / 시청자 수 -->
         <section class="detail-stats">
             <ul class="stats-list">
-                <li>
-                    <strong>⭐평점</strong>
-                    <span>8.3 / 10</span>
-                </li>
-                <li>
-                    <strong>🔥예매율</strong>
-                    <span>21.7%</span>
-                </li>
-                <li>
-                    <strong>👥시청자 수</strong>
-                    <span>1,920,000명</span>
-                </li>
+                <li><strong>⭐평점</strong><span>8.3 / 10</span></li>
+                <li><strong>🔥예매율</strong><span>21.7%</span></li>
+                <li><strong>👥시청자 수</strong><span>1,920,000명</span></li>
             </ul>
         </section>
 
@@ -95,28 +89,12 @@
 
                 <!-- 상세 정보 리스트 -->
                 <dl class="info-list">
-                    <dt>감독</dt>
-                    <dd>아이안 모리스</dd>
-
-                    <dt>출연</dt>
-                    <dd>
-                        소피아 카슨,코리 밀크리스트,더 그레이 스콧,캐서린 맥코맥,해리 트레볼드윈,  
-                        에스메 킹덤,니킬 파마,포비 길버트
-                    </dd>
-
-                    <dt>각본</dt>
-                    <dd>앨리슨 버넷,멜리사 오스본</dd>
-                
-                    <dt>장르</dt>
-                    <dd>
-                        로맨틱 코미디 영화,코미디 영화,로맥틱한 영화,도서 원작 영화,미국 영화
-                    </dd>
-
-                    <dt>영화 특징</dt>
-                    <dd>진심이통하는,달콤 쌉싸름,감정을 파고드는</dd>
-
-                    <dt>관람 등급</dt>
-                    <dd>15세 이상 관람가</dd>
+                    <dt>감독</dt><dd>아이안 모리스</dd>
+                    <dt>출연</dt><dd>소피아 카슨,코리 밀크리스트,더 그레이 스콧,캐서린 맥코맥,해리 트레볼드윈,   에스메 킹덤,니킬 파마,포비 길버트</dd>
+                    <dt>각본</dt><dd>앨리슨 버넷,멜리사 오스본</dd>
+                    <dt>장르</dt><dd>로맨틱 코미디 영화,코미디 영화,로맥틱한 영화,도서 원작 영화,미국 영화</dd>
+                    <dt>영화 특징</dt><dd>진심이통하는,달콤 쌉싸름,감정을 파고드는</dd>
+                    <dt>관람 등급</dt><dd>15세 이상 관람가</dd>
                 </dl>
 
                 <!-- 리뷰 유도 영역 -->
@@ -139,8 +117,8 @@
                                 영화의 어떤 점이 좋았는지 이야기해주세요.
                             </p>
                         </div>
-                </div> <!-- ✅ cta-box 닫힘-->
-            </section> <!-- ✅ review-cta 닫힘-->
+                    </div> <!-- ✅ cta-box 닫힘-->
+                </section> <!-- ✅ review-cta 닫힘-->
 
             <!-- 관람평 작성 영역 -->
             <section class="review-write" id="review-form">
@@ -158,12 +136,7 @@
                     </div>
 
                     <div class="review-input-area">
-                        <textarea
-                            class="review-input"
-                            placeholder="관람평을 남겨주세요"
-                            rows="2"
-                            maxlength="300">
-                        </textarea>
+                        <textarea class="review-input" placeholder="관람평을 남겨주세요." rows="2" maxlength="300"></textarea>
 
                         <!-- 펼쳐지는 영역 -->
                         <div class="review-expand">
@@ -196,14 +169,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 로그인 필요 안내 (비로그인 시) -->
-                <!--
-                <div class="review-login-guide">
-                    <p>로그인 후 관람평을 작성할 수 있습니다.</p>
-                    <a href="login.html" class="btn-login">로그인</a>
-                </div>
-                -->
             </section>
 
             <!-- 주요정보 관람평 작성 -->
@@ -441,25 +406,28 @@
     </section>
 </main>
 
-    <!-- footer -->
+    <!-- ✅ footer -->
     <footer class="footer">
+        <div class="footer-inner">
 
         <!-- footer menu -->
         <nav class="footer-menu">
-            <a href="help-center.html">고객센터</a>
-            <a href="gift-cards.html">기프트카드</a>
-            <a href="https://ir.netflix.net" target="_blank" rel="noopener noreferrer">투자 정보(IR)</a>
-            <a href="terms.html">이용약관</a>
-            <a href="privacy-policy.html">개인정보 처리방침</a>
-            <a href="legal-notices.html">법적고지</a>
-            <a href="company-info.html">회사 정보</a>
-            <a href="contact.html">문의하기</a>
+            <ul>
+                <li><a href="help-center.html">고객센터</a></li>
+                <li><a href="gift-cards.html">기프트카드</a></li>
+                <li><a href="https://ir.netflix.net" target="_blank" rel="noopener noreferrer">투자 정보(IR)</a></li>
+                <li><a href="terms.html">이용약관</a></li>
+                <li><a href="privacy-policy.html">개인정보 처리방침</a></li>
+                <li><a href="legal-notices.html">법적고지</a></li>
+                <li><a href="company-info.html">회사 정보</a></li>
+                <li><a href="contact.html">문의하기</a></li>
+            </ul>
         </nav>
 
         <!-- footer middle -->
         <div class="footer-middle">
             <div class="footer-icon">
-                <img src="images/icon.png" alt="NETFLIX 로고">
+                <img src="images/icon.png" alt="넷플릭스 아이콘">
                 <p>© Netflix Clone</p>
             </div>
 
@@ -472,40 +440,40 @@
                 <p>클라우드 호스팅: Amazon Web Services Inc.</p>
                 <p>공정거래위원회 웹사이트</p>
             </div>
+        </div>
 
-            <!-- footer bottom -->
-            <div class="footer-bottom">
+        <!-- footer bottom -->
+        <div class="footer-bottom">
 
-                <!-- SNS -->
-                <div class="footer-sns">
-                    <a href="https://www.instagram.com/netflixkr/" target="_blank"><img src="images/footer-instagram.png" alt="인스타그램"></a>
-                    <a href="https://www.youtube.com/@NetflixKorea" target="_blank"><img src="images/footer-YouTube.png" alt="유튜브"></a>
-                    <a href="https://www.facebook.com/NetflixKR/?locale=ko_KR" target="_blank"><img src="images/footer-facebook.png" alt="페이스북"></a>
-                    <a href="https://x.com/netflixkr" target="_blank"><img src="images/footer-twitter.png" alt="트위터"></a>
-                </div>
+            <!-- SNS -->
+            <div class="footer-sns">
+                <a href="https://www.instagram.com/netflixkr/" target="_blank"><img src="images/footer-instagram.png" alt="인스타그램"></a>
+                <a href="https://www.youtube.com/@NetflixKorea" target="_blank"><img src="images/footer-YouTube.png" alt="유튜브"></a>
+                <a href="https://www.facebook.com/NetflixKR/?locale=ko_KR" target="_blank"><img src="images/footer-facebook.png" alt="페이스북"></a>
+                <a href="https://x.com/netflixkr" target="_blank"><img src="images/footer-twitter.png" alt="트위터"></a>
+            </div>
 
-                <!-- utils (language + search) -->
-                <div class="footer-utils">
+            <!-- utils (language + search) -->
+            <div class="footer-utils">
 
-                    <!-- language display -->
+                <!-- language display -->
                     <div class="footer-language">
-                        <span class="footer-language-icon">🌐</span>
-                        <span class="footer-language-code">KR</span>
-                        <span class="footer-language__sep">·</span>
-                        <span class="footer-language-code">EN</span>
-                    </div>
+                    <span class="footer-language-icon">🌐</span>
+                    <span class="footer-language-code">KR</span>
+                    <span class="footer-language-sep">·</span>
+                    <span class="footer-language-code">EN</span>
+                </div>
 
                 <!-- search -->
                 <div class="footer-search">
                     <form action="location.html">
                         <input type="text" placeholder="위치찾기" />
-                        <button type="submit" aria-label="search">🔍</button>
+                        <button type="submit" aria-label="search" >🔍</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <script src="js/detail.js"></script>
 </body>

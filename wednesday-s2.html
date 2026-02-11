@@ -4,32 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>웬즈데이 시즌2 | 상세정보</title>
-    <link rel="stylesheet" href="css/detail.css">
     <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/detail.css">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/footer.css">
-
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo.png" alt="넷플릭스 로고" />
-            </a>
-        </div>
-
-        <div class="profile">
-            <div class="profile-toggle" id="profile-btn">
-                <img src="images/icon-profile.png" alt="프로필 아이콘"/>
-                <span class="arrow">▼</span>
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="넷플릭스 로고" />
+                </a>
             </div>
-            <div class="dropdown-menu" id="dropdown">
-                <ul>
-                    <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
-                    <li><a href="account.html">계정</a></li>
-                    <li><a href="profile.html">프로필 관리</a></li>
-                    <li><a href="help-center.html">고객 센터</a></li>
-                    <li><a href="logout.html">로그아웃</a></li>
-                </ul>
+
+            <div class="profile">
+                <div class="profile-toggle" id="profile-btn">
+                    <img src="images/icon-profile.png" alt="프로필 아이콘"/>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown-menu" id="dropdown">
+                    <ul>
+                        <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
+                        <li><a href="account.html">계정</a></li>
+                        <li><a href="profile.html">프로필 관리</a></li>
+                        <li><a href="help-center.html">고객 센터</a></li>
+                        <li><a href="logout.html">로그아웃</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -56,18 +58,9 @@
         <!-- 평점 / 예매율 / 시청자 수 -->
         <section class="detail-stats">
             <ul class="stats-list">
-                <li>
-                    <strong>⭐평점</strong>
-                    <span>8.9 / 10</span>
-                </li>
-                <li>
-                    <strong>🔥예매율</strong>
-                    <span>32.4%</span>
-                </li>
-                <li>
-                    <strong>👥시청자 수</strong>
-                    <span>3,850,000명</span>
-                </li>
+                <li><strong>⭐평점</strong><span>8.9 / 10</span></li>
+                <li><strong>🔥예매율</strong><span>32.4%</span></li>
+                <li><strong>👥시청자 수</strong><span>3,850,000명</span></li>
             </ul>
         </section>
 
@@ -97,25 +90,11 @@
 
                 <!-- 상세 정보 리스트 -->
                 <dl class="info-list">
-                    <dt>감독</dt>
-                    <dd>매기 강,크리스 애플한스</dd>
-
-                    <dt>출연</dt>
-                    <dd>
-                        제나 오르테가, 그웬돌린 크리스티,캐서린 제타 존스,에마 마이어스,루이스 구스만,
-                        크리스티나 리치,스티브 부세미,헌터 두핸,조이 선데이,리키 린드홈,무사 모스타파 등
-                    </dd>
-
-                    <dt>장르</dt>
-                    <dd>
-                        청춘드라마,청소년 시리즈,미터리 시리즈,코미디 시리즈,범죄 시리즈
-                    </dd>
-
-                    <dt>시리즈 특징</dt>
-                    <dd>으스스한,상상의나래</dd>
-
-                    <dt>관람 등급</dt>
-                    <dd>15세 이상 관람가</dd>
+                    <dt>감독</dt><dd>매기 강,크리스 애플한스</dd>
+                    <dt>출연</dt><dd>제나 오르테가, 그웬돌린 크리스티,캐서린 제타 존스,에마 마이어스,루이스 구스만,크리스티나 리치,스티브 부세미,헌터 두핸,조이 선데이,리키 린드홈,무사 모스타파 등</dd>
+                    <dt>장르</dt><dd>청춘드라마,청소년 시리즈,미터리 시리즈,코미디 시리즈,범죄 시리즈</dd>
+                    <dt>시리즈 특징</dt><dd>으스스한,상상의나래</dd>
+                    <dt>관람 등급</dt><dd>15세 이상 관람가</dd>
                 </dl>
 
                 <!-- 리뷰 유도 영역 -->
@@ -157,12 +136,7 @@
                     </div>
 
                     <div class="review-input-area">
-                        <textarea
-                            class="review-input"
-                            placeholder="관람평을 남겨주세요"
-                            rows="2"
-                            maxlength="300">
-                        </textarea>
+                        <textarea class="review-input" placeholder="관람평을 남겨주세요." rows="2" maxlength="300"></textarea>
 
                         <!-- 펼쳐지는 영역 -->
                         <div class="review-expand">
@@ -195,14 +169,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 로그인 필요 안내 (비로그인 시) -->
-                <!--
-                <div class="review-login-guide">
-                    <p>로그인 후 관람평을 작성할 수 있습니다.</p>
-                    <a href="login.html" class="btn-login">로그인</a>
-                </div>
-                -->
             </section>
 
             <!-- 주요정보 관람평 작성 -->
@@ -443,25 +409,28 @@
     </section>
 </main>
 
-<!-- footer -->
+    <!-- ✅ footer -->
     <footer class="footer">
+        <div class="footer-inner">
 
         <!-- footer menu -->
         <nav class="footer-menu">
-            <a href="help-center.html">고객센터</a>
-            <a href="gift-cards.html">기프트카드</a>
-            <a href="https://ir.netflix.net" target="_blank" rel="noopener noreferrer">투자 정보(IR)</a>
-            <a href="terms.html">이용약관</a>
-            <a href="privacy-policy.html">개인정보 처리방침</a>
-            <a href="legal-notices.html">법적고지</a>
-            <a href="company-info.html">회사 정보</a>
-            <a href="contact.html">문의하기</a>
+            <ul>
+                <li><a href="help-center.html">고객센터</a></li>
+                <li><a href="gift-cards.html">기프트카드</a></li>
+                <li><a href="https://ir.netflix.net" target="_blank" rel="noopener noreferrer">투자 정보(IR)</a></li>
+                <li><a href="terms.html">이용약관</a></li>
+                <li><a href="privacy-policy.html">개인정보 처리방침</a></li>
+                <li><a href="legal-notices.html">법적고지</a></li>
+                <li><a href="company-info.html">회사 정보</a></li>
+                <li><a href="contact.html">문의하기</a></li>
+            </ul>
         </nav>
 
         <!-- footer middle -->
         <div class="footer-middle">
             <div class="footer-icon">
-                <img src="images/icon.png" alt="NETFLIX 로고">
+                <img src="images/icon.png" alt="넷플릭스 아이콘">
                 <p>© Netflix Clone</p>
             </div>
 
@@ -491,10 +460,10 @@
             <div class="footer-utils">
 
                 <!-- language display -->
-                <div class="footer-language">
+                    <div class="footer-language">
                     <span class="footer-language-icon">🌐</span>
                     <span class="footer-language-code">KR</span>
-                    <span class="footer-language__sep">·</span>
+                    <span class="footer-language-sep">·</span>
                     <span class="footer-language-code">EN</span>
                 </div>
 
@@ -502,13 +471,12 @@
                 <div class="footer-search">
                     <form action="location.html">
                         <input type="text" placeholder="위치찾기" />
-                        <button type="submit" aria-label="search">🔍</button>
+                        <button type="submit" aria-label="search" >🔍</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <script src="js/detail.js"></script>
 </body>

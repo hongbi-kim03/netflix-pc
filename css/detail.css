@@ -1,13 +1,16 @@
-    /* =====================
-    기본 설정
-    ===================== */
     * {
+        margin: 0;
+        padding: 0;
         box-sizing: border-box;
     }
 
-    /* =====================
-    접근성 유틸리티
-    ===================== */
+    body {
+        color: white; /* 텍스트는 화이트*/
+        min-width: 1280px;
+        padding-top: 60px;
+    }
+
+    /* 근성 유틸리티 */
     .sr-only {
         position: absolute;
         width: 1px;
@@ -20,15 +23,10 @@
         border: 0;
     }
 
-    body {
-        margin: 0;
-        background: linear-gradient(180deg, #14001f 0%, #000000 55%);
-        color: #fff;
-    }
-
     /* wrap */
     .wrap {
-        min-width: 1000px;
+        width: 1280px; /* 1280px 고정 */
+        margin: 0 auto;
     } 
 
     img {
@@ -45,17 +43,30 @@
 
     /* Header */
     .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-width: 1280px;
         height: 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px 40px;
+        z-index: 1000; /* 모바일 메뉴보다 낮게, 컨텐츠보단 높게 */
+        background-color: rgba(88, 53, 102, 0.5);
+        backdrop-filter: blur(4px);
         border-bottom: 1px solid rgba(200, 180, 200, 0.4);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); 
-        
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     }
 
-    .header .logo img {
+    .header-inner {
+        width: 1280px;   /* ⭐ 핵심 */
+        margin: 0 auto;      /* ⭐ 중앙 정렬 */
+        padding: 0 20px;     /* 모바일 여백 */
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo img {
         height: 28px;
     }
 
@@ -66,6 +77,7 @@
         cursor: pointer;
     }
 
+    /* 아이콘 + 화살표 묶음 */
     .profile-toggle {
         display: flex;
         align-items: center;
@@ -75,6 +87,29 @@
         font-size: 16px;
     }
 
+    /* ▼ 화살표 기본 상태 */
+    .profile-toggle .arrow {
+        display: inline-block;
+        font-size: 12px;
+        color: #ff3366;
+        transition: transform 0.3s ease;
+        transform-origin: center;
+    }
+
+    /* 드롭다운 열릴 때 화살표 회전 (▼ → ▲) */
+    .profile-toggle.active .arrow {
+        display: inline-block;
+        font-size: 12px;
+        color: #ff3366;
+        transition: transform 0.3s ease;
+        transform-origin: center;
+        transform: rotate(180deg);
+    }
+
+    .profile-toggle:hover {
+        opacity: 0.8;
+    }
+
     .profile-toggle img {
         width: 32px;
         height: 32px;
@@ -82,66 +117,91 @@
         object-fit: cover;
     }
 
-    .profile-toggle .arrow {
-        font-size: 12px;
-        color: #ff3366;
-        transition: transform 0.3s;
-    }
-
-    .profile-toggle.active .arrow {
-        transform: rotate(180deg);
-    }
-
     .dropdown-menu {
         position: absolute;
         right: 0;
-        top: 45px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        width: 200px;
+        top: 55px; /* 헤더와의 간격을 조금 더 줌 */
+        width: 220px;
         display: none;
         opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.25s, transform 0.25s;
+        transform: translateY(10px); /* 아래에서 위로 올라오는 느낌 */
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); /* 더 쫀득한 애니메이션 */
         z-index: 100;
+        overflow: hidden; /* 테두리 곡선에 맞게 내부 요소 자름 */
+
+        background-color: rgba(20, 20, 20, 0.8); /* 아주 어두운 반투명 블랙 */
+        backdrop-filter: blur(20px); /* 배경을 강하게 흐리게 함 */
+        -webkit-backdrop-filter: blur(20px);
+
+        /* 핵심 2: 테두리와 그림자 */
+        border: 1px solid rgba(255, 255, 255, 0.1); /* 은은한 흰색 테두리 */
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     }
 
+    /* 드롭다운 활성화 상태 */
     .dropdown-menu.active {
         display: block;
         opacity: 1;
         transform: translateY(0);
     }
 
+    /* 리스트 스타일 제거 */
     .dropdown-menu ul {
         list-style: none;
         padding: 8px 0;
-    }
-
-    .dropdown-menu li {
-        border-bottom: 1px solid #eee;
-    }
-
-    .dropdown-menu li:last-child {
-        border-bottom: none;
+        margin: 0;
     }
 
     .dropdown-menu a {
-        display: block;
-        padding: 12px 16px;
-        color: #333;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+
+        /* 글자색: 반투명 화이트로 세련되게 */
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
         font-size: 14px;
+        transition: all 0.2s ease;
+        position: relative;
     }
 
     .dropdown-menu a:hover {
-        background-color: #f5f5f5;
+        background-color: rgba(255, 255, 255, 0.05); /* 살짝 밝아지는 느낌 */
+        color: #ffffff; /* 글자색은 완전 흰색으로 */
     }
 
-    /* =============================
-    메인 컨테이너
-    ============================= */
+    /* 포인트 3: 아이콘이나 이모지 공간 확보 (필요시) */
+    .dropdown-menu a::before {
+        content: "";
+        width: 3px;
+        height: 0;
+        background-color: #ff3366;
+        position: absolute;
+        left: 0;
+        transition: height 0.2s ease;
+    }
+
+    .dropdown-menu a:hover::before {
+        height: 18px; /* 호버 시 왼쪽 바 생성 */
+    }
+
+    /* 구분선 (로그아웃 버튼 등 강조용) */
+    .dropdown-menu li:last-child {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: 4px;
+    }
+
+    .dropdown-menu li:last-child a {
+        color: rgba(255, 255, 255, 0.4); /* 로그아웃은 약간 더 흐리게 */
+    }
+
+    .dropdown-menu li:last-child a:hover {
+        color: #ff3366; /* 호버 시엔 브랜드 컬러로 */
+    }
+
+    /* 메인 컨테이너 */
     .reset-password-container {
         padding: 40px;
         max-width: 1200px;
@@ -151,42 +211,14 @@
         align-items: flex-start;
     }
 
-    /* 사이드바 */
-    .sidebar {
-        width: 220px;
-    }
-
-    .sidebar .back-link {
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 600;
-        color: #333;
-        padding: 8px 12px;
-        border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.8);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        text-decoration: none;
-        transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
-    }
-
-    .sidebar .back-link:hover {
-        transform: translateX(-4px) scale(1.05);
-        background-color: rgba(229, 9, 20, 0.1);
-        color: #ff3366;
-    }
-
-    /* =====================
-    컨테이너
-    ===================== */
+    /* 컨테이너 */
     .detail-container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 40px 20px 120px; /* 120px 하단 여백 */
     }
 
-    /* =====================
-    상단 히어로 영역
-    ===================== */
+    /* 상단 히어로 영역 */
     .detail-hero {
         display: grid;
         grid-template-columns: 1.2fr 0.8fr;
@@ -208,7 +240,7 @@
     }
 
     /* 버튼 영역 */
-        .action-buttons {
+    .action-buttons {
         display: flex;
         gap: 12px;
     }
@@ -227,12 +259,12 @@
     .btn-share {
         padding: 10px 20px;
         border-radius: 6px;
-        background: #e50914;
+        background: #F26522; /* 로고색 */
         font-weight: 600;
     }
 
     .btn-share:hover {
-        background: #f6121d;
+        background: #FF844B; /* 호버 시 조금 더 밝은 오렌지 */
     }
 
     /* 포스터 */
@@ -251,8 +283,12 @@
     .stats-list {
         display: flex;
         justify-content: space-between;
-        padding: 24px;
-        background: #1f1f1f;
+        padding: 24px 40px;
+        /* background: #1f1f1f; */
+        /* 1번 글래스모피즘 스타일 */
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 12px;
         list-style: none;
     }
@@ -260,18 +296,38 @@
     .stats-list li {
         text-align: center;
         flex: 1;
+        position: relative;
+    }
+
+    /* 항목 사이의 구분선 */
+    .stats-list li:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 20%;
+        width: 1px;
+        height: 60%;
+        background: rgba(255, 255, 255, 0.1);
     }
 
     .stats-list strong {
         display: block;
         font-size: 14px;
-        color: #aaa;
+        color: #bbb; /* 보조 텍스트는 약간 흐리게 */
         margin-bottom: 6px;
+        font-weight: 400;
     }
 
     .stats-list span {
-        font-size: 22px;
+        display: block;
+        font-size: 24px;
         font-weight: 700;
+        color: #fff; /* 수치는 확실하게 화이트 */
+    }
+
+    /* 평점 별 모양이나 숫자에 포인트 컬러를 주고 싶다면 */
+    .stats-list .highlight {
+        color: #ff3366; 
     }
 
     /* =====================
@@ -296,15 +352,14 @@
         padding-bottom: 8px;
     }
 
+    /* 탭 메뉴 강조선 */
     .tab-menu li.active button {
         color: #fff;
         font-weight: 700;
-        border-bottom: 3px solid #e50914;
+        border-bottom: 3px solid #F26522;
     }
 
-    /* =====================
-    탭 콘텐츠
-    ===================== */
+    /* 탭 콘텐츠 */
     .tab-panel {
         display: none;
         line-height: 1.7;
@@ -325,10 +380,6 @@
     }
 
     .info-list {
-        /* display: grid;
-        grid-template-columns: auto 1fr;
-        column-gap: 8px;
-        row-gap: 8px; */
         margin: 0;
         line-height: 1.7;
     }
@@ -370,31 +421,43 @@
 
     .cta-box {
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: 120px 1fr auto; 
         align-items: center;
         gap: 24px;
-        background: #1f1f1f;
-        padding: 20px 24px;
-        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03); 
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 24px 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
 
     .cta-left {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 4px;
+        align-items: center;      /* 가로축 중앙 정렬 (핵심!) */
+        justify-content: center;   /* 세로축 중앙 정렬 */
+        gap: 6px;                 /* 아이콘과 텍스트 사이 간격 */
+        text-align: center;       /* 텍스트 자체도 중앙 정렬 */
     }
 
     .netflix-icon {
-        width: 28px;
-        /* height: auto;
-        flex-shrink: 0; */
+        width: 24px;            /* 적절한 크기로 조정 */
+        height: auto;
+        display: block;
+        margin: 0 auto;         /* 확실한 중앙 정렬 */
     }
 
+    /* 넷플릭스 텍스트 */
     .netflix-text {
-        font-size: 12px;
-        color: #aaa;
-        letter-spacing: 0.5px;
+        display: block;           /* width를 가지기 위해 block 설정 */
+        width: 100%;              /* 부모(.cta-left)의 너비를 가득 채움 */
+        font-size: 11px;
+        font-weight: 700;
+        color: #F26522;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;       /* 글자를 영역 내에서 가운데로! */
     }
 
     .cta-center p {
@@ -403,42 +466,45 @@
         font-size: 15px;
     }
 
+    /* 확인하기 버튼 */
     .btn-review {
         background: #fff;
         color: #000;
-        padding: 10px 18px;
-        border-radius: 6px;
+        padding: 12px 24px;
+        border-radius: 8px;
         font-weight: 700;
-        text-decoration: none;
-        white-space: nowrap;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
     }
 
     .btn-review:hover {
-        background: #e5e5e5;
+        background: #F26522; /* 로고색 */
+        color: #fff;
+        transform: translateY(-2px);
     }
 
-
-    /* =====================
-    관람평 작성 폼
-    ===================== */
+    /* 관람평 작성 폼 */
     .review-write {
-        margin-bottom: 24px;
+        margin-bottom: 40px;
+        background: rgba(255, 255, 255, 0.02); /* 배경에 아주 살짝 밝기 부여 */
+        padding: 24px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     /* ℹ️ 안내 문구 */
     .review-guide {
-        margin: 12px 0 20px;
-        padding: 10px 14px;
-        background: #1f1f1f;
-        border-left: 3px solid #e50914;
-        color: #bbb;
-        font-size: 13px;
-        line-height: 1.5;
+        margin-bottom: 20px;
+        padding: 12px 16px;
+        background: rgba(242, 101, 34, 0.05); /* 넷플릭스 레드 아주 투명하게 */
+        border-left: 4px solid #F26522;
+        border-radius: 4px;
+        color: #ccc;
+        font-size: 13.5px;
     }
 
     .review-guide strong {
-        color: #fff;
-        font-weight: 600;
+        color: #FF844B; /* 로고보다 살짝 밝은 오렌지 */
     }
 
     .review-write-guide::before {
@@ -448,23 +514,27 @@
 
     .review-write-box {
         display: flex;
-        gap: 12px;
-        padding: 16px;
-        background: #1c1c1c;
-        border-radius: 8px;
+        gap: 16px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.3); /* 입력창 배경을 조금 더 어둡게 눌러줌 */
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: border-color 0.3s ease;
     }
 
-    .review-write .review-avatar img {
-        width: 40px;
-        height: 40px;
+    /* 아바타 */
+    .review-avatar img {
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.1);
     }
 
     .review-input-area {
         flex: 1;
     }
 
-    /* textarea */
+    /* textarea 스타일링*/
     .review-input {
         width: 100%;
         background: #2a2a2a;
@@ -474,11 +544,11 @@
         color: #fff;
         font-size: 14px;
         resize: none;
-        outline: none;
+        outline: none; 
     }
 
     .review-input::placeholder {
-        color: #999;
+        color: #666;
     }
 
     /* 펼쳐지는 영역 */
@@ -496,12 +566,13 @@
         margin-top: 12px;
     }
 
-    /* 별점 */
+    /* 별점 영역 */
     .star-rating {
         display: flex;
         flex-direction: row-reverse;
         justify-content: flex-end;
-        gap: 4px;
+        gap: 6px;
+        margin-bottom: 10px;
     }
 
     .star-rating input {
@@ -509,24 +580,27 @@
     }
 
     .star-rating label {
-        font-size: 22px;
-        color: #555;
+        font-size: 26px; /* 조금 더 키워서 터치/클릭 편하게 */
+        color: #333; /* 비활성 별 색상 */
         cursor: pointer;
+        transition: transform 0.2s ease, color 0.2s ease;
     }
 
+    .star-rating label:hover {
+        transform: scale(1.2);
+    }
+
+    /* 별점 선택/호버 시 색상: 금색(#ffcc00) 혹은 넷플릭스 레드(#e50914) 추천 */
     .star-rating input:checked ~ label,
     .star-rating label:hover,
     .star-rating label:hover ~ label {
-        color: #e50914;
+        color: #ffcc00; /* 신뢰감을 주는 골드 컬러 추천 */
     }
 
-    /* 글자수 */
+    /* 하단 글자수와 버튼 */
     .text-count {
-        display: block;
-        margin-top: 6px;
         font-size: 12px;
-        color: #aaa;
-        text-align: right;
+        color: #888;
     }
 
     /* 버튼 */
@@ -547,12 +621,18 @@
     }
 
     .btn-submit {
-        background: #e50914;
+        background: #F26522;
         border: none;
         color: #fff;
-        padding: 6px 14px;
-        border-radius: 4px;
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-weight: 700;
+        transition: background 0.2s, transform 0.1s;
         cursor: pointer;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+        transform: translateY(-1px);
     }
 
     .btn-submit:disabled {
@@ -597,35 +677,54 @@
         color: #aaa;
     }
 
+    /* 관람평 리스트 컨테이너 */
     .review-list {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        list-style: none;
+        gap: 16px; /* 간격을 살짝 좁혀서 밀도감 있게 */
     }
 
     .review-list li {
-        background: #1f1f1f;
-        padding: 16px;
-        border-radius: 8px;
-    }
-
-    .review-card {
-        background: #111;
+        background: rgba(255, 255, 255, 0.02); /* 배경보다 아주 미세하게 밝음 */
+        border: 1px solid rgba(255, 255, 255, 0.05); /* 경계만 살짝 */
         border-radius: 12px;
-        padding: 16px;
+        padding: 20px;
+        transition: all 0.3s ease;
     }
 
-    /* 왼쪽 */
+    /* 마우스 올렸을 때 (추천하는 변화) */
+    .review-list li:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateX(4px); /* 오른쪽으로 살짝 밀리는 느낌이 리스트에서 아주 예뻐요 */
+    }
+
+    /* 개별 관람평 카드 */
+    .review-card {
+    background: rgba(255, 255, 255, 0.05); /* 기본 투명도를 살짝 올림 */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* 테두리를 조금 더 선명하게 */
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px; /* 카드 간격 확보 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 애니메이션을 더 부드럽게 */
+    }
+
+    .review-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-2px); /* 호버 시 아주 살짝 떠오르는 효과 */
+    }
+
+    /* 유저 정보 영역 */
     .review-inner {
         display: flex;
-        gap: 12px;
+        gap: 16px;
     }
 
     .review-avatar {
         flex-shrink: 0;
     }
 
+    /* 아바타 테두리 포인트 */
     .review-avatar img {
         width: 40px;
         height: 40px;
@@ -637,15 +736,31 @@
         flex: 1;
     }
 
+    /* 상단 정보 (닉네임, 날짜) */
     .review-top {
         display: flex;
         justify-content: space-between;
-        font-size: 13px;
-        color: #999;
+        align-items: center;
+        margin-bottom: 8px;
     }
 
+    .review-top .user-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .review-top .date {
+        font-size: 12px;
+        color: #777;
+    }
+
+    /* 별점 및 점수 */
     .review-rating {
-        margin: 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 4px; /* 별들 사이의 간격 */
+        margin: 12px 0;
         font-size: 14px;
         color: #ffcc00;
     }
@@ -655,11 +770,13 @@
         margin-left: 4px;
     }
 
+    /* 본문 텍스트 (가독성 강화) */
     .review-text {
-        font-size: 14px;
-        line-height: 1.5;
-        color: #e5e5e5;
-        margin-bottom: 12px;
+        font-size: 15px;
+        line-height: 1.7;
+        color: #d1d1d1; /* 순백색보다 약간 톤다운된 그레이가 눈이 덜 아픔 */
+        margin-bottom: 20px;
+        word-break: keep-all;
     }
 
     .review-actions {
@@ -667,25 +784,26 @@
         justify-content: flex-end;
     }
 
+    /* 하단 좋아요 버튼 - 배경 추가로 클릭 영역 강조 */
     .review-actions .btn-like {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 6px 12px;
+        border-radius: 20px;
         border: none;
         color: #aaa;
-        font-size: 13px;
+        font-size: 12px;
         cursor: pointer;
+        transition: all 0.2s ease; /* 부드러운 색상 변화를 위해 추가 */
     }
 
     .review-actions .btn-like:hover {
-        color: #fff;
+    background: #FF844B; 
+    color: #fff;
+    font-weight: 600; /* 글자를 살짝 두껍게 해서 가독성 확보 */
+    box-shadow: 0 2px 8px rgba(255, 132, 75, 0.3); /* 은은한 오렌지빛 그림자 추가 */
     }
 
-    /* 실관람평 */
-
-    /* 예고편 / 스틸컷 */
-
-    /* =====================
-    예고편 영역 전체
-    ===================== */
+    /* 예고편 영역 전체 */
     .trailer-slider {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
@@ -727,8 +845,6 @@
 
     /* 비디오 래퍼 */
     .trailer-video {
-        /* display: flex;
-        justify-content: center; */
         position: relative;
         width: 100%;
         max-width: 520px;
@@ -748,22 +864,13 @@
 
     /* iframe */
     .trailer-video iframe {
-        /* width: 100%;
-        max-width: 500px; 
-        aspect-ratio: 16 / 9;
-        border: none;
-        border-radius: 12px;
-        background: #000; */
-            width: 100%;
+        width: 100%;
         height: 100%;
         border: none;
         pointer-events: auto; /* 🔥 iframe 활성 유지 */
     }
 
-
-    /* =====================
-    스틸컷 슬라이더 (Grab 방식)
-    ===================== */
+    /* 스틸컷 슬라이더 (Grab 방식) */
     .stillcut-slider {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
@@ -812,7 +919,6 @@
         object-fit: cover;
         border-radius: 12px;
         background: #000;
-        /* pointer-events: auto; */
         user-select: none;
         -webkit-user-drag: none;
         transition: transform 0.15s ease;
@@ -822,107 +928,3 @@
         transform: scale(0.98);
     }
 
-    /* =====================
-    모바일 최적화
-    ===================== */
-        @media (max-width: 768px) {
-        .trailer-slider,
-        .stillcut-slider {
-        padding: 16px 10vw;
-    }
-
-    .trailer-list .slide,
-    .stillcut-list .slide {
-        flex-basis: 85%;
-    }
-
-    .trailer-video,
-    .stillcut-list img {
-        border-radius: 10px;
-    }
-    }
-
-    /* 반응형 */
-    /* PC 기본 (1280px 이상) */
-    .detail-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 40px 20px 120px;
-    }
-
-    /* mobile (360px) */
-    @media (max-width: 360px) {
-    .detail-container {
-        padding: 24px 12px 64px;
-    }
-
-    .poster img {
-        width: 200px;
-    }
-
-    .detail-title {
-        font-size: 20px;
-    }
-
-    .detail-description {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-
-    /* 관람평 입력 */
-    .review-write-box {
-        gap: 8px;
-    }
-
-    .review-input {
-        font-size: 14px;
-    }
-
-    .review-item {
-        padding: 12px;
-    }
-
-    .footer {
-        min-width: 320px;
-    }
-    }
-
-    /* 태블릿 세로 / 큰 모바일 (758px ) */
-    @media (max-width: 758px) {
-    .detail-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .poster img {
-        width: 240px;
-    }
-
-    .detail-info {
-        width: 100%;
-    }
-
-    .action-buttons {
-        justify-content: center;
-    }
-
-    .detail-container {
-        padding-bottom: 80px;
-    }
-    }
-
-    /* 태블릿 가로 (1024px) */
-    @media (max-width: 1024px) {
-    .detail-container {
-        padding: 32px 16px 100px;
-    }
-
-    .detail-header {
-        gap: 24px;
-    }
-
-    .poster img {
-        width: 280px;
-    }
-    }
