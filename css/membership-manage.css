@@ -4,158 +4,39 @@
         box-sizing: border-box;
     }
 
-    /* Google Fonts */
-    /* Noto Sans KR를 weight별로 활용 */
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;350;500;900&display=swap');
-
     /* Typography System */
     body {
-        font-family: 'Noto Sans KR', sans-serif;
-        background-color: #fafafa;
-        color: #222;
+        color: white; /* 텍스트는 화이트*/
+        min-width: 1280px;
     }
 
     /* 상단 헤더 */
     .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-width: 1280px;
+        height: 60px;
+        z-index: 1000; /* 모바일 메뉴보다 낮게, 컨텐츠보단 높게 */
+        background-color: rgba(88, 53, 102, 0.5);
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid rgba(200, 180, 200, 0.4);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-inner {
+        width: 1280px;   /* ⭐ 핵심 */
+        margin: 0 auto;      /* ⭐ 중앙 정렬 */
+        padding: 0 20px;     /* 모바일 여백 */
+        height: 100%;
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        align-items: center;
-        padding: 16px 40px;
-        border-bottom: 1px solid #ddd;
-        background-color: #fff;
     }
 
-    .header .logo img {
+    .logo img {
         height: 28px;
-    }
-
-    /* 메인 컨테이너 */
-    .account-container {
-        display: flex;
-        padding: 40px;
-        max-width: 1200px;
-        margin: 0 auto;
-        gap: 40px;
-    }
-
-    /* 왼쪽 사이드바 */
-    .sidebar {
-        width: 220px;
-    }
-
-    .sidebar .back-link {
-        /* display: inline-block;
-    color: #000;
-    font-size: 14px;
-    margin-bottom: 24px;
-    text-decoration: none; */
-        display: inline-block;
-        font-size: 18px;
-        /* 크기 키우기 */
-        font-weight: 600;
-        /* 선명하게 */
-        color: #333;
-        /* 기본 텍스트 컬러 */
-        padding: 8px 12px;
-        /* 버튼처럼 여백 확보 */
-        border-radius: 8px;
-        /* 둥근 모서리 */
-        background-color: rgba(255, 255, 255, 0.8);
-        /* 반투명 배경으로 카드 느낌 */
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        text-decoration: none;
-        transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
-    }
-
-    .sidebar .back-link:hover {
-        transform: translateX(-4px) scale(1.05);
-        background-color: rgba(229, 9, 20, 0.1);
-        /* 넷플릭스 레드 계열 연하게 */
-        color: #ff3366;
-    }
-
-    .sidebar .back-link:active {
-        transform: translateX(-2px) scale(0.98);
-    }
-
-    .sidebar .menu {
-        list-style: none;
-    }
-
-    .sidebar .menu li {
-        margin-bottom: 18px;
-    }
-
-    .sidebar .menu a {
-        text-decoration: none;
-        color: #444;
-        font-size: 16px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .sidebar .menu a.active,
-    .sidebar .menu a:hover {
-        color: #e50914;
-        font-weight: 600;
-    }
-
-    .sidebar .menu a.active {
-        background-color: #f4f4f4;
-        border-left: 4px solid #e50914;
-        padding-left: 12px;
-    }
-
-    /* 프로필 관리 */
-    .profile-list {
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 16px 20px;
-    }
-
-    .profile-list h3 {
-        font-size: 16px;
-        margin-bottom: 12px;
-    }
-
-    .profile-list .profiles {
-        display: flex;
-        gap: 10px;
-    }
-
-    .profile-list .profiles img {
-        width: 48px;
-        height: 48px;
-        border-radius: 8px;
-        object-fit: cover;
-        /* cursor: pointer; */
-    }
-
-    /* .profile-list .profiles img:hover {
-    transform: scale(1.08);
-} */
-
-    .profiles img.active {
-        outline: 3px solid #e50914;
-    }
-
-    /* 설정 버튼 */
-    .profile-settings-btn {
-        margin-left: auto;
-        margin-right: 40px;
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: #555;
-        transition: color 0.2s, transform 0.2s;
-    }
-
-    .profile-settings-btn:hover {
-        transform: scale(1.1);
-        color: #b0060f;
     }
 
     /* 드롭다운 메뉴 */
@@ -176,12 +57,19 @@
         font-size: 16px;
     }
 
+    .profile-toggle img {
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        object-fit: cover;
+    }
+
     /* ▼ 화살표 기본 상태 */
     .profile-toggle .arrow {
         display: inline-block;
         font-size: 12px;
         color: #ff3366;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.3s ease;
         transform-origin: center;
     }
 
@@ -199,27 +87,26 @@
         opacity: 0.8;
     }
 
-    .profile-toggle img {
-        width: 32px;
-        height: 32px;
-        border-radius: 4px;
-        object-fit: cover;
-    }
-
     .dropdown-menu {
         position: absolute;
         right: 0;
-        top: 45px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        width: 200px;
+        top: 55px; /* 헤더와의 간격을 조금 더 줌 */
+        width: 220px;
         display: none;
         opacity: 0;
-        transform: translateY(-10px);
-        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+        transform: translateY(10px); /* 아래에서 위로 올라오는 느낌 */
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); /* 더 쫀득한 애니메이션 */
         z-index: 100;
+        overflow: hidden; /* 테두리 곡선에 맞게 내부 요소 자름 */
+
+        background-color: rgba(20, 20, 20, 0.8); /* 아주 어두운 반투명 블랙 */
+        backdrop-filter: blur(20px); /* 배경을 강하게 흐리게 함 */
+        -webkit-backdrop-filter: blur(20px);
+
+        /* 핵심 2: 테두리와 그림자 */
+        border: 1px solid rgba(255, 255, 255, 0.1); /* 은은한 흰색 테두리 */
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     }
 
     /* 드롭다운 활성화 상태 */
@@ -229,34 +116,140 @@
         transform: translateY(0);
     }
 
+    /* 리스트 스타일 제거 */
     .dropdown-menu ul {
         list-style: none;
         padding: 8px 0;
         margin: 0;
     }
 
-    .dropdown-menu li {
-        border-bottom: 1px solid #eee;
-    }
-
-    .dropdown-menu li:last-child {
-        border-bottom: none;
-    }
-
     .dropdown-menu a {
-        display: block;
-        padding: 12px 16px;
-        color: #333;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+
+        /* 글자색: 반투명 화이트로 세련되게 */
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
         font-size: 14px;
+        transition: all 0.2s ease;
+        position: relative;
     }
 
     .dropdown-menu a:hover {
-        background-color: #f5f5f5;
+        background-color: rgba(255, 255, 255, 0.05); /* 살짝 밝아지는 느낌 */
+        color: #ffffff; /* 글자색은 완전 흰색으로 */
     }
 
+    /* 포인트 3: 아이콘이나 이모지 공간 확보 (필요시) */
+    .dropdown-menu a::before {
+        content: "";
+        width: 3px;
+        height: 0;
+        background-color: #ff3366;
+        position: absolute;
+        left: 0;
+        transition: height 0.2s ease;
+    }
 
+    .dropdown-menu a:hover::before {
+        height: 18px; /* 호버 시 왼쪽 바 생성 */
+    }
 
+    /* 구분선 (로그아웃 버튼 등 강조용) */
+    .dropdown-menu li:last-child {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: 4px;
+    }
+
+    .dropdown-menu li:last-child a {
+        color: rgba(255, 255, 255, 0.4); /* 로그아웃은 약간 더 흐리게 */
+    }
+
+    .dropdown-menu li:last-child a:hover {
+        color: #ff3366; /* 호버 시엔 브랜드 컬러로 */
+    }
+
+    /* 메인 컨테이너 */
+    .account-container {
+        margin: 0 auto;
+        max-width: 1280px; 
+        padding: 40px 20px; /* 좌우 패딩 추가 */
+        margin: 80px auto 0;
+        gap: 40px;
+        display: flex;
+    }
+
+    /* 왼쪽 사이드바 */
+    .sidebar {
+        width: 220px;
+    }
+
+    .sidebar .back-link {
+        display: inline-block;
+        font-size: 18px;            
+        font-weight: 600;           
+        color: #fff;                
+        padding: 8px 12px;         
+        border-radius: 8px;         
+        background-color: rgba(255, 255, 255, 0.1); 
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        text-decoration: none;
+        transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
+    }
+
+    .sidebar .back-link:hover {
+        transform: translateX(-5px);
+        color: #ff3366;
+    }
+
+    .sidebar .menu li {
+        margin-bottom: 8px;
+    }
+
+    .sidebar .menu a {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.5); /* 평소에는 은은하게 */
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .sidebar .menu a:hover {
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar .menu a.active {
+        color: #ffffff;
+        font-weight: 700;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #ff3366;
+    }
+
+    /* 오른쪽 메인 콘텐츠 */
+    .account-content {
+        flex: 1;
+    }
+
+    .page-header {
+        margin-bottom: 30px;
+    }
+
+    .page-header h2 {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    .page-header p {
+        color: rgba(255, 255, 255, 0.6);
+    }
 
     /* 오른쪽 메인 콘텐츠 */
     .membership-manage-content {
@@ -270,62 +263,127 @@
         padding: 40px;
     }
 
-    .account__nav ul {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .account__nav a.active {
-        font-weight: 700;
-    }
-
     .card {
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        padding: 24px;
+        background: rgba(255, 255, 255, 0.03); /* 아주 미세한 밝기 */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1); /* 은은한 테두리 */
+        border-radius: 16px; /* 조금 더 둥글게 */
+        padding: 30px;
         margin-bottom: 24px;
+        transition: all 0.3s ease;
+        color: #ffffff;
     }
 
-    .card--membership {
-        border-top: 6px solid purple;
+    .card:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
-    .card__link {
+    /* 멤버십 전용 카드 (포인트 강조) */
+    .card.card-membership {
+        position: relative;
+        overflow: hidden;
+        /* 보라색 포인트가 아닌 세련된 핑크-레드 그라데이션 보더 */
+        border-top: none; 
+    }
+
+    /* 상단에 얇은 그라데이션 선 추가 */
+    .card.card-membership::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #ff3366, #8e44ad);
+    }
+
+    .card-header strong {
+        font-size: 20px;
+        color: #ff3366; /* 강조색 */
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .card-header p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* 결제 정보 영역 (더 깔끔하게) */
+    .payment h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 40px 0 20px;
+        padding-left: 5px;
+    }
+
+    .notice {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+        background: rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 3px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* 카드 내부 링크 (버튼 스타일) */
+    .card-link {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        text-decoration: none;
         font-weight: 600;
+        transition: color 0.2s;
     }
 
+    .card-link:hover {
+        color: #ff3366;
+    }
+
+    .card-link span {
+        font-size: 24px;
+        line-height: 1;
+    }
 
     /* Footer 영역 */
     .footer {
-        border-top: 1px solid #ddd;
-        background-color: #fafafa;
-        color: #555;
+        min-width: 1280px; /* 배경 잘림 방지 */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: rgba(0, 0, 0, 0.4); /* 본문 배경과 어우러지는 반투명 블랙 */
+        color:#8c8c8c; /* 넷플릭스 푸터 특유의 회색 톤 */
         padding: 50px 0;
-        margin-top: 60px;
+        margin-top: 80px;
     }
 
     .footer-container {
-        max-width: 1000px;
+        width: 1280px;
         margin: 0 auto;
         padding: 0 20px;
     }
 
+    /* 질문 섹션 */
     .footer-question {
         font-size: 16px;
         margin-bottom: 30px;
+        color: #8c8c8c;
     }
 
     .footer-question a {
-        color: #0071eb;
+        color: #8c8c8c;
         text-decoration: none;
     }
 
     .footer-question a:hover {
-        text-decoration: underline;
+        color: #b3b3b3; /* 호버 시 약간 밝은 회색 */
+        text-decoration: underline; /* 링크임을 인지시킴 */
     }
 
     /* 링크 목록 */
@@ -333,39 +391,29 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         list-style: none;
-        gap: 12px 20px;
+        gap: 15px 20px;
         margin-bottom: 40px;
     }
 
     .footer-links a {
         text-decoration: none;
-        color: #333;
-        font-size: 14px;
+        color: #8c8c8c;
+        font-size: 13px;
+        transition: color 0.2s ease;
     }
 
     .footer-links a:hover {
         text-decoration: underline;
+        color: #ffffff; /* 호버 시에만 흰색으로 강조 */
     }
 
     /* 회사 정보 */
     .footer-info {
-        font-size: 12px;
-        line-height: 1.6;
-        color: #777;
+        font-size: 11px;
+        line-height: 1.8;
+        color: #666; /* 가장 눈에 안 띄어야 하는 정보이므로 더 어두운 회색 */
     }
 
-    .footer-info p+p {
-        margin-top: 4px;
-    }
-
-
-    @media (max-width: 768px) {
-        .account-container {
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .sidebar {
-            width: 100%;
-        }
+    .footer-info p + p {
+        margin-top: 6px;
     }
