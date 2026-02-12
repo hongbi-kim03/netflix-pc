@@ -4,37 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멤버십 변경</title>
-    <link rel="stylesheet" href="css/membership.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/membership-change.css">
+    <link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
-        <header class="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="images/logo.png" alt="넷플릭스 로고" />
-            </a>
-        </div>
-
-        <div class="profile">
-            <div class="profile-toggle" id="profile-btn">
-                <img src="images/icon-profile.png" alt="프로필 아이콘"/>
-                <span class="arrow">▼</span>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="넷플릭스 로고" />
+                </a>
             </div>
-            <div class="dropdown-menu" id="dropdown">
-                <ul>
-                    <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
-                    <li><a href="account.html">계정</a></li>
-                    <li><a href="profile.html">프로필 관리</a></li>
-                    <li><a href="help-center.html">고객 센터</a></li>
-                    <li><a href="logout.html">로그아웃</a></li>
-                </ul>
+
+            <div class="profile">
+                <div class="profile-toggle" id="profile-btn">
+                    <img src="images/icon-profile.png" alt="프로필 아이콘"/>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown-menu" id="dropdown">
+                    <ul>
+                        <li><a href="index.html">← 넷플릭스로 돌아가기</a></li>
+                        <li><a href="account.html">👤 계정</a></li>
+                        <li><a href="profile.html">⚙️ 프로필 관리</a></li>
+                        <li><a href="help-center.html">❓ 고객 센터</a></li>
+                        <li><a href="logout.html">🚪 로그아웃</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- 메인 컨테이너 -->
-    <main class="membership-container">
-
-        <!-- 왼쪽 사이드바 -->
+    <main class="account-container">
         <aside class="sidebar">
             <a href="account.html" class="back-link">← 계정으로 돌아가기</a>
         </aside>
@@ -43,12 +44,11 @@
         <section class="membership-change-content">
             <h1>멤버십 변경</h1>
             <p>새 멤버십을 이용해 보세요. 마음에 안 들면 언제든지 다시 전환하실 수 있습니다.</p>
-        
+
             <!-- 요금제 카드 -->
             <section class="plans">
-
                 <!-- 광고형 스탠다드 -->
-                <article class="plan"  data-plan="ads">
+                <article class="plan"  data-plan="ads" data-name="광고형 스탠다드">
                     <div class="plan-ads">광고형 스탠다드<br>1080p</div>
                     <ul class="plan-details">
                         <li>8,000원 낮아진 월 요금이 LG U+ 청구서에 통합.</li>
@@ -62,7 +62,7 @@
                 </article>
 
                 <!-- 스탠다드 -->
-                <article class="plan"  data-plan="standard">
+                <article class="plan"  data-plan="standard" data-name="스탠다드">
                     <div class="current-plan">현재 멤버십</div>
                     <div class="plan-standard">스탠다드<br>1080p</div>
                     <ul class="plan-details">
@@ -77,7 +77,7 @@
                 </article>
 
                 <!-- 프리미엄 -->
-                <article class="plan" data-plan="premium">
+                <article class="plan" data-plan="premium" data-name="프리미엄">
                     <div class="plan-premium">프리미엄<br>4K + HDR</div>
                     <ul class="plan-details">
                         <li>월 요금: 월 3,500원의 추가 요금이 LG U+ 청구서에 통합.</li>
@@ -93,9 +93,7 @@
 
             <!-- 선택한 멤버십 표시 -->
             <p class="selected-plan-text">선택한 멤버십: 없음</p>
-
             <button class="next-btn" disabled>다음</button>
-
             <section class="info-text">
                 <p>광고형 멤버십으로 대부분의 넷플릭스 시리즈와 영화를 이용할 수 있지만, 라이선스 제한으로 인해 시청할 수 없는 콘텐츠도 일부 있습니다. <a href="#">광고형 멤버십에 대해 자세히 알아보세요.</a></p>
                 <p>* 실제 금액은 LG U+사와의 약관에 따라 다를 수 있으며 LG U+ 청구서에 표시됩니다.</p>
@@ -105,35 +103,36 @@
         </section>
     </main>
 
-        <!-- 푸터 -->
-        <footer class="footer">
-            <div class="footer-container">
-                <p class="footer-question">
-                    질문이 있으신가요? <a href="help-center.html">고객 센터에 문의하세요</a>
-                </p>
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-container">
+            <p class="footer-question">
+                질문이 있으신가요? <a href="help-center.html">고객 센터에 문의하세요</a>
+            </p>
 
-                <ul class="footer-links">
-                    <li><a href="https://ir.netflix.net" target="_blank" rel="noopener noreferrer">투자 정보(IR)</a></li>
-                    <li><a href="terms.html">이용 약관</a></li>
-                    <li><a href="gift-cards.html">기프트 카드</a></li>
-                    <li><a href="#">미디어 센터</a></li>
-                    <li><a href="#">입사 정보</a></li>
-                    <li><a href="#">쿠키 설정</a></li>
-                    <li><a href="privacy-policy.html">개인정보 처리방침</a></li>
-                    <li><a href="#">음성 및 자막</a></li>
-                    <li><a href="help.html">고객 센터</a></li>
-                </ul>
+            <ul class="footer-links">
+                <li><a href="https://ir.netflix.net" target="_blank" rel="noopener noreferrer">투자 정보(IR)</a></li>
+                <li><a href="terms.html">이용 약관</a></li>
+                <li><a href="gift-cards.html">기프트 카드</a></li>
+                <li><a href="#">미디어 센터</a></li>
+                <li><a href="#">입사 정보</a></li>
+                <li><a href="#">쿠키 설정</a></li>
+                <li><a href="privacy-policy.html">개인정보 처리방침</a></li>
+                <li><a href="#">음성 및 자막</a></li>
+                <li><a href="help-center.html">고객 센터</a></li>
+            </ul>
 
-                <div class="footer-info">
-                    <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 대표 리드 헤이스팅스</p>
-                    <p>이메일 주소: korea@netflix.com</p>
-                    <p>주소: 대한민국 서울특별시 종로구 종로 26, 센트로폴리스 A동 20층, 우편번호 03161</p>
-                    <p>사업자등록번호: 165-87-00119</p>
-                    <p>호스팅 서비스: Amazon Web Services Inc.</p>
-                    <p>공정거래위원회 웹사이트</p>
-                </div>
+            <div class="footer-info">
+                <p>넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 대표 리드 헤이스팅스</p>
+                <p>이메일 주소: korea@netflix.com</p>
+                <p>주소: 대한민국 서울특별시 종로구 종로 26, 센트로폴리스 A동 20층, 우편번호 03161</p>
+                <p>사업자등록번호: 165-87-00119</p>
+                <p>호스팅 서비스: Amazon Web Services Inc.</p>
+                <p>공정거래위원회 웹사이트</p>
             </div>
-        </footer>
-    <script src="js/membership.js"></script>
+        </div>
+    </footer>
+
+    <script src="js/membership-change.js"></script>
 </body>
 </html>
