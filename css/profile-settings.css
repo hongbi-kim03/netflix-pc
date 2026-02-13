@@ -5,103 +5,39 @@
 }
 
 body {
-  font-family: "맑은 고딕", "나눔고딕", sans-serif;
-  background-color: #f8f8f8;
-  color: #222;
+  color: white; /* 텍스트는 화이트*/
+  min-width: 1280px;
 }
 
-/* =======================
-  상단 헤더
-======================= */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 1280px;
+  height: 60px;
+  z-index: 1000; /* 모바일 메뉴보다 낮게, 컨텐츠보단 높게 */
   background-color: rgba(88, 53, 102, 0.5);
   backdrop-filter: blur(4px);
   border-bottom: 1px solid rgba(200, 180, 200, 0.4);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.header .logo img {
+.header-inner {
+  width: 1280px;   /* ⭐ 핵심 */
+  margin: 0 auto;      /* ⭐ 중앙 정렬 */
+  padding: 0 20px;     /* 모바일 여백 */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
   height: 28px;
 }
 
-/* =======================
-  메인 컨테이너
-======================= */
-.profile-setting-container {
-  display: flex;
-  gap: 40px;
-  padding: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-}
-
-/* =======================
-  왼쪽 사이드바
-======================= */
-.sidebar {
-  width: 220px;
-}
-
-.sidebar .back-link {
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
-}
-
-.sidebar .back-link:hover {
-  transform: translateX(-4px) scale(1.05);
-  background-color: rgba(229, 9, 20, 0.1);
-  color: #ff3366;
-}
-
-.sidebar .back-link:active {
-  transform: translateX(-2px) scale(0.98);
-}
-
-.sidebar .menu {
-  list-style: none;
-}
-
-.sidebar .menu li {
-  margin-bottom: 18px;
-}
-
-.sidebar .menu a {
-  text-decoration: none;
-  color: #444;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sidebar .menu a.active,
-.sidebar .menu a:hover {
-  color: #e50914;
-  font-weight: 600;
-}
-
-.sidebar .menu a.active {
-  background-color: #f4f4f4;
-  border-left: 4px solid #e50914;
-  padding-left: 12px;
-}
-
-/* =======================
-  드롭다운 메뉴
-======================= */
+/* 드롭다운 메뉴 */
 .profile {
   position: relative;
   display: inline-block;
@@ -116,6 +52,13 @@ body {
   position: relative;
   color: #fff;
   font-size: 16px;
+}
+
+.profile-toggle img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
 }
 
 /* ▼ 화살표 기본 상태 */
@@ -141,66 +84,134 @@ body {
   opacity: 0.8;
 }
 
-.profile-toggle img {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  object-fit: cover;
-}
-
 .dropdown-menu {
   position: absolute;
   right: 0;
-  top: 45px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  width: 200px;
+  top: 55px; /* 헤더와의 간격을 조금 더 줌 */
+  width: 220px;
   display: none;
   opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  transform: translateY(10px); /* 아래에서 위로 올라오는 느낌 */
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); /* 더 쫀득한 애니메이션 */
   z-index: 100;
+  overflow: hidden; /* 테두리 곡선에 맞게 내부 요소 자름 */
+
+  background-color: rgba(20, 20, 20, 0.8); /* 아주 어두운 반투명 블랙 */
+  backdrop-filter: blur(20px); /* 배경을 강하게 흐리게 함 */
+  -webkit-backdrop-filter: blur(20px);
+
+  /* 핵심 2: 테두리와 그림자 */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* 은은한 흰색 테두리 */
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
+/* 드롭다운 활성화 상태 */
 .dropdown-menu.active {
   display: block;
   opacity: 1;
   transform: translateY(0);
 }
 
+/* 리스트 스타일 제거 */
 .dropdown-menu ul {
   list-style: none;
   padding: 8px 0;
   margin: 0;
 }
 
-.dropdown-menu li {
-  border-bottom: 1px solid #eee;
-}
-
-.dropdown-menu li:last-child {
-  border-bottom: none;
-}
-
 .dropdown-menu a {
-  display: block;
-  padding: 12px 16px;
-  color: #333;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+
+  /* 글자색: 반투명 화이트로 세련되게 */
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
   font-size: 14px;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .dropdown-menu a:hover {
-  background-color: #f5f5f5;
+  background-color: rgba(255, 255, 255, 0.05); /* 살짝 밝아지는 느낌 */
+  color: #ffffff; /* 글자색은 완전 흰색으로 */
 }
 
-/* =======================
-  오른쪽 메인 콘텐츠
-======================= */
+/* 포인트 3: 아이콘이나 이모지 공간 확보 (필요시) */
+.dropdown-menu a::before {
+  content: "";
+  width: 3px;
+  height: 0;
+  background-color: #ff3366;
+  position: absolute;
+  left: 0;
+  transition: height 0.2s ease;
+}
+
+.dropdown-menu a:hover::before {
+  height: 18px; /* 호버 시 왼쪽 바 생성 */
+}
+
+/* 구분선 (로그아웃 버튼 등 강조용) */
+.dropdown-menu li:last-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 4px;
+}
+
+.dropdown-menu li:last-child a {
+  color: rgba(255, 255, 255, 0.4); /* 로그아웃은 약간 더 흐리게 */
+}
+
+.dropdown-menu li:last-child a:hover {
+  color: #ff3366; /* 호버 시엔 브랜드 컬러로 */
+}
+
+/* 메인 컨테이너 */
+.profile-setting-container {
+  width: 1280px;
+  margin: 0 auto;
+  max-width: 1280px; 
+  padding: 40px 20px; /* 좌우 패딩 추가 */
+  margin: 80px auto 0;
+  gap: 40px;
+  display: flex;
+}
+
+/* 왼쪽 사이드바 */
+.sidebar {
+  width: 220px;
+}
+
+.sidebar .back-link {
+  display: inline-block;
+  font-size: 18px;            
+  font-weight: 600;           
+  color: #fff;                
+  padding: 8px 12px;         
+  border-radius: 8px;         
+  background-color: rgba(255, 255, 255, 0.05); 
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
+}
+
+.sidebar .back-link:hover {
+  transform: translateX(-5px);
+  color: #ff3366;
+}
+
+
+
+/* 오른쪽 메인 콘텐츠 */
 .profile-setting-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* ⭐ 모든 그룹 사이에 일정한 40px 여백 자동 생성 */
 }
 
 .profile-setting-content h1 {
@@ -210,18 +221,29 @@ body {
 
 /* Profile group */
 .profile-group {
-  background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.05); /* 완전 투명보다 살짝 밝은 블랙 */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 /* 각 프로필 항목 */
 .profile-item {
   display: flex;
+  justify-content: space-between; 
   align-items: center;
   gap: 15px;
-  border-top: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  padding: 12px 10px;
+  background-color: rgba(255, 255, 255, 0.08); /* 어두운 배경에 맞는 반투명 화이트 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none; /* 기존 border-bottom 제거 */
+  margin-bottom: 10px; /* 아이템 간 간격 확보 */
 }
 
 .profile-item:first-child {
@@ -229,24 +251,30 @@ body {
 }
 
 .profile-item:hover {
-  background-color: #f8f8f8;
-  border-radius: 8px;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .profile-item img {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border-radius: 8px;
+  object-fit: cover;
 }
 
+/* 프로필 섹션 디테일 */
 .profile-info-edit {
   display: flex;
   flex-direction: column;
+  flex: 1; /* 텍스트 영역이 남은 공간을 다 차지하게 함 */
 }
 
 .profile-name {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* 어두운 배경에서 글자를 더 선명하게 */
+  white-space: nowrap;
   margin-bottom: 4px;
 }
 
@@ -255,44 +283,58 @@ body {
   color: #777;
 }
 
+/* 버튼들 (공통 스타일 적용) */
 .profile-settings-btn {
   margin-left: auto;
+  margin-right: 40px;
   background: none;
   border: none;
-  color: #ff3366;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .profile-settings-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.2) rotate(15deg); /* 살짝 회전하면서 커지는 효과 */
+  color: #ff3366; 
+  filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.6)); /* 네온 효과 추가 */
 }
 
 /* Profile lock */
 .profile-item {
   display: flex;
+  justify-content: space-between; 
   align-items: center;
   gap: 15px;
-  padding: 12px 0;
-  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  padding: 12px 10px;
+  background-color: rgba(255, 255, 255, 0.08); /* 어두운 배경에 맞는 반투명 화이트 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none; /* 기존 border-bottom 제거 */
+  margin-bottom: 10px; /* 아이템 간 간격 확보 */
 }
 
 .profile-item img {
-  width: 64px;
-  height: 64px;
-  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
+/* 프로필 섹션 디테일 */
 .profile-lock {
   display: flex;
   flex-direction: column;
-  font-size: 14px;
+  flex: 1; /* 텍스트 영역이 남은 공간을 다 차지하게 함 */
 }
 
 .profile-lock span {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
+  color: #ffffff;
   margin-bottom: 4px;
 }
 
@@ -301,31 +343,33 @@ body {
   color: #777;
 }
 
+/* 버튼들 (공통 스타일 적용) */
 .profile-lock-btn {
   margin-left: auto;
-  /* 오른쪽 끝으로 이동 */
+  margin-right: 40px;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  color: #ff3366;
-  transition: color 0.2s ease, transform 0.2s ease;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .profile-lock-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.2) rotate(15deg); /* 살짝 회전하면서 커지는 효과 */
+  color: #ff3366; 
+  filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.6)); /* 네온 효과 추가 */
 }
 
 /* 설정  */
 .settings-group {
-  background-color: #fff;
-  border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.05); /* 완전 투명보다 살짝 밝은 블랙 */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .settings-group h2 {
@@ -336,42 +380,41 @@ body {
 
 .setting-item {
   display: flex;
-  justify-content: space-between;
-  /* 왼쪽 정보, 오른쪽 버튼 분리 */
+  justify-content: space-between; 
   align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #e5e5e5;
-  background-color: #fff;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  cursor: pointer;
+  gap: 15px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  padding: 12px 10px;
+  background-color: rgba(255, 255, 255, 0.08); /* 어두운 배경에 맞는 반투명 화이트 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none; /* 기존 border-bottom 제거 */
+  margin-bottom: 10px; /* 아이템 간 간격 확보 */
 }
 
 /* Hover 효과 */
 .setting-item:hover {
-  background-color: #f2f2f2;
-  /* 살짝 밝게 */
-  transform: translateY(-2px);
-  /* 살짝 떠오르는 느낌 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  /* 은은한 그림자 */
+  transform: translateY(-2px);   /* 살짝 떠오르는 느낌 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);   /* 은은한 그림자 */
 }
-
 
 .setting-item:last-child {
-  border-bottom: none;
-  /* 마지막 항목은 구분선 제거 */
+  border-bottom: none;   /* 마지막 항목은 구분선 제거 */
 }
 
+/* 프로필 섹션 디테일 */
 .setting-info {
   display: flex;
   flex-direction: column;
-  /* 이름 위, 설명 아래 */
+  flex: 1; /* 텍스트 영역이 남은 공간을 다 차지하게 함 */
 }
 
 .setting-name {
-  font-weight: bold;
   font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
 }
 
 .setting-desc {
@@ -380,51 +423,46 @@ body {
   margin-top: 4px;
 }
 
-
 /* 프로필 삭제 영역 */
 .delete-profile {
-  /* background-color: #fff;          
-  border: 1px solid #e5e5e5;       
-  border-radius: 8px; */
   padding: 20px;
   display: flex;
-  flex-direction: column;
-  /* 버튼 위, 안내문 아래 */
+  flex-direction: column;   /* 버튼 위, 안내문 아래 */
   gap: 12px;
-  /* 요소 간 간격 */
-  /* max-width: 400px;             */
 }
 
-
-/* 오른쪽 이동 버튼 */
+/* 버튼들 (공통 스타일 적용) */
 .go-btn {
-  font-size: 20px;
-  color: #ff3366;
+  margin-left: auto;
+  margin-right: 40px;
   background: none;
   border: none;
+  font-size: 20px;
   cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .go-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.2) rotate(15deg); /* 살짝 회전하면서 커지는 효과 */
+  color: #ff3366; 
+  filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.6)); /* 네온 효과 추가 */
 }
 
-
-
-/* 프로필 삭제 버튼(비활성화 상태) */
+/* 삭제 버튼 (진짜 '비활성' 느낌으로) */
 .btn-delete {
-  color: #333;
-  font-weight: bold;
-  font-size: 16px;
-  border: #444;
-  border-radius: 8px;
-  padding: 12px 20px;
-  /* pointer-events: none; */
-  opacity: 0.5;
-  /* 반투명으로 비활성 느낌 */
+  background-color: rgba(255, 255, 255, 0.05); /* 배경은 더 은은하게 */
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 500;             /* 굵기를 살짝 줄여서 덜 강조되게 */
+  font-size: 14px;             /* 15px -> 14px로 축소 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 10px 20px;          /* 상하 패딩을 줄여 높이 축소 */
   cursor: not-allowed;
-  /* 금지 커서 표시 */
+  width: fit-content;          /* ⭐ 핵심: 콘텐츠 크기에 딱 맞게 줄임 */
+  display: inline-block;       /* 너비 조절을 위해 추가 */
+  margin: 0 auto;              /* 중앙 정렬 (부모가 text-align: center일 때) */
+  transition: all 0.2s ease;
 }
 
 /* hover, active 등 상태에서도 그대로 금지 커서 유지 */
@@ -432,47 +470,48 @@ body {
 .btn-delete:active {
   cursor: not-allowed;
   opacity: 0.5;
-  /* hover시 색상 변경 없앰 */
   transform: none;
-  /* hover scale 효과 제거 */
 }
 
 /* 안내문 */
 .delete-profile p {
   font-size: 13px;
   color: #777;
-  /* 회색 안내문 */
   margin: 0;
   text-align: center;
 }
 
 /* Footer 영역 */
 .footer {
-  border-top: 1px solid #ddd;
-  background-color: #fafafa;
-  color: #555;
+  min-width: 1280px; /* 배경 잘림 방지 */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.4); /* 본문 배경과 어우러지는 반투명 블랙 */
+  color:#8c8c8c; /* 넷플릭스 푸터 특유의 회색 톤 */
   padding: 50px 0;
-  margin-top: 60px;
+  margin-top: 80px;
 }
 
 .footer-container {
-  max-width: 1000px;
+  width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+/* 질문 섹션 */
 .footer-question {
   font-size: 16px;
   margin-bottom: 30px;
+  color: #8c8c8c;
 }
 
 .footer-question a {
-  color: #0071eb;
+  color: #8c8c8c;
   text-decoration: none;
 }
 
 .footer-question a:hover {
-  text-decoration: underline;
+  color: #b3b3b3; /* 호버 시 약간 밝은 회색 */
+  text-decoration: underline; /* 링크임을 인지시킴 */
 }
 
 /* 링크 목록 */
@@ -480,44 +519,29 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   list-style: none;
-  gap: 12px 20px;
+  gap: 15px 20px;
   margin-bottom: 40px;
 }
 
 .footer-links a {
   text-decoration: none;
-  color: #333;
-  font-size: 14px;
+  color: #8c8c8c;
+  font-size: 13px;
+  transition: color 0.2s ease;
 }
 
 .footer-links a:hover {
   text-decoration: underline;
+  color: #ffffff; /* 호버 시에만 흰색으로 강조 */
 }
 
 /* 회사 정보 */
 .footer-info {
-  font-size: 12px;
-  line-height: 1.6;
-  color: #777;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #666; /* 가장 눈에 안 띄어야 하는 정보이므로 더 어두운 회색 */
 }
 
-.footer-info p+p {
-  margin-top: 4px;
-}
-
-
-/* Responsive */
-@media (max-width: 900px) {
-  .profile-setting-container {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    margin-bottom: 20px;
-  }
-
-  .profile-item img {
-    width: 48px;
-    height: 48px;
-  }
+.footer-info p + p {
+  margin-top: 6px;
 }
